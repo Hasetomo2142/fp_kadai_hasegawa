@@ -14,7 +14,9 @@ gem 'devise', '~> 4.9'
 gem 'ridgepole', '~> 2.1'
 gem 'slim-rails'
 gem 'html2slim'
-
+gem 'bootstrap', '~> 5.3.0'
+gem 'jquery-rails'
+gem 'sassc-rails'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
