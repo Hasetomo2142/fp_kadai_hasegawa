@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_action :authenticate_client!, only: :home
+  # before_action :authenticate_client!
 
   def home
   end
