@@ -1,8 +1,73 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+inherit_from: .rubocop_todo.yml
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+  Include:
+    - '**/*.rb'
+    - 'Schemafile'
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+  TargetRubyVersion: 3.2
+  TargetRailsVersion: 7.0
+  DisplayCopNames: true
+
+Rails:
+  Enabled: true
+Bundler/OrderedGems:
+  Enabled: false
+Naming/MethodParameterName:
+  MinNameLength: 1
+Naming/PredicateName:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/BlockComments:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'Schemafile'
+    - 'spec/**/*'
+    - 'config/routes.rb'
+Metrics/MethodLength:
+  Max: 30
+Metrics/AbcSize:
+  Max: 35
+Metrics/ClassLength:
+  Max: 500
+Metrics/CyclomaticComplexity:
+  Max: 8
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/MessageChain:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 10
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Max: 20
+RSpec/MultipleMemoizedHelpers:
+  Max: 20
+RSpec/SharedExamples:
+  Enabled: false
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+Rails/I18nLocaleTexts:
+  Enabled: false
