@@ -15,9 +15,9 @@ html
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   body
-    - flash.each do |message_type, message|
-      |  <div class="alert alert-
-      = message_type
-      | ">
-      = message
+    = render 'layouts/header'
+    div.container.mt-3
+      - flash.each do |type, message|
+        div.alert class="alert-#{type == 'notice' ? 'success' : 'danger'}"
+          = message
     = yield
