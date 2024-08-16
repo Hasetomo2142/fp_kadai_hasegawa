@@ -12,6 +12,9 @@ gem 'tzinfo-data', platforms: %i[ windows jruby ]
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
 gem 'ridgepole', '~> 2.1'
+gem 'slim-rails'
+gem 'html2slim'
+
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
