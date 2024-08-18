@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     # Plannerモデル用のストロングパラメータ
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name description]) if resource_class == Planner
     devise_parameter_sanitizer.permit(:account_update, keys: %i[name description]) if resource_class == Planner
-    
+
     # Clientモデル用のストロングパラメータ
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name]) if resource_class == Client
     devise_parameter_sanitizer.permit(:account_update, keys: %i[name]) if resource_class == Client
