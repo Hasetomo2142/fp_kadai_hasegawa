@@ -1,0 +1,4 @@
+class Meeting < ApplicationRecord
+  belongs_to :client
+  belongs_to :planner
+end
