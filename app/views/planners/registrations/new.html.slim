@@ -23,5 +23,9 @@
           br
           = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
         .form-group
+          = f.label :description
+          br
+          = f.text_area :description, class: "form-control"
+        .form-group
           = f.submit "Sign up", class: "btn btn-primary"
       = render "devise/shared/links"

@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # Plannerモデル用のストロングパラメータ
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name]) if resource_class == Planner
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name]) if resource_class == Planner
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name description]) if resource_class == Planner
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name description]) if resource_class == Planner
     
     # Clientモデル用のストロングパラメータ
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name]) if resource_class == Client
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name]) if resource_class == Client
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name]) if resource_class == Client
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name]) if resource_class == Client
   end
 end

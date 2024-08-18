@@ -32,6 +32,10 @@ h2
     | (we need your current password to confirm your changes)
   br
   = f.password_field :current_password, autocomplete: "current-password"
+  .field
+    = f.label :description
+  br
+  = f.text_area :description
   .actions
     = f.submit "Update"
 h3
