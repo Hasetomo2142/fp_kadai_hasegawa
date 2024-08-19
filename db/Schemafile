@@ -1,7 +1,7 @@
 # encoding: utf-8
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-create_table "clients", charset: "utf8mb4", force: :cascade do |t|
+create_table "clients", charset: "utf8mb4", do |t|
   t.string "name", null: false
   t.string "email", default: "", null: false
   t.string "encrypted_password", default: "", null: false
@@ -14,7 +14,7 @@ create_table "clients", charset: "utf8mb4", force: :cascade do |t|
   t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
 end
 
-create_table "meetings", charset: "utf8mb4", force: :cascade do |t|
+create_table "meetings", charset: "utf8mb4", do |t|
   t.bigint "client_id"
   t.bigint "planner_id", null: false
   t.datetime "start_time"
@@ -25,7 +25,7 @@ create_table "meetings", charset: "utf8mb4", force: :cascade do |t|
   t.index ["planner_id"], name: "index_meetings_on_planner_id"
 end
 
-create_table "planners", charset: "utf8mb4", force: :cascade do |t|
+create_table "planners", charset: "utf8mb4", do |t|
   t.string "name", null: false
   t.string "email", default: "", null: false
   t.string "description", null: false
