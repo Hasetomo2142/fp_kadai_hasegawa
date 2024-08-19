@@ -25,6 +25,7 @@ group :development, :test do
   gem 'rubocop-rails-omakase', require: false
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
+  gem 'spring-commands-rspec'
 end
 
 group :development do
