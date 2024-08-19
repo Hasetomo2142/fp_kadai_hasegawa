@@ -23,6 +23,7 @@ group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
   gem 'brakeman', require: false
   gem 'rubocop-rails-omakase', require: false
+  gem 'rspec-rails', '~> 6.1.0'
 end
 
 group :development do
