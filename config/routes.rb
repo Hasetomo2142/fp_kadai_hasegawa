@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :planners
-  devise_for :clients
+  devise_for :planners, controllers: {
+    sessions:      'planners/sessions',
+    passwords:     'planners/passwords',
+    registrations: 'planners/registrations'
+  }
+  devise_for :clients, controllers: {
+    sessions:      'clients/sessions',
+    passwords:     'clients/passwords',
+    registrations: 'clients/registrations'
+  }
   root "static_pages#home"
   get "static_pages/help"
   get "static_pages/about"
