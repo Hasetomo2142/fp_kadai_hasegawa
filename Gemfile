@@ -18,6 +18,7 @@ gem 'bootstrap', '~> 5.3.0'
 gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'mini_racer'
+gem 'simple_calendar'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
