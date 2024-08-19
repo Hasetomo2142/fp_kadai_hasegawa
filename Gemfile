@@ -29,6 +29,7 @@ group :development, :test do
   gem 'rubocop-factory_bot'
   gem 'rubocop-rspec_rails'
   gem 'slim_lint'
+  gem 'faker'
 end
 
 group :development do
