@@ -28,6 +28,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'rubocop-factory_bot'
   gem 'rubocop-rspec_rails'
+  gem 'slim_lint'
 end
 
 group :development do
