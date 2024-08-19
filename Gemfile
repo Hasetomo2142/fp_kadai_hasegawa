@@ -26,6 +26,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
+  gem 'rubocop-factory_bot'
+  gem 'rubocop-rspec_rails'
 end
 
 group :development do
