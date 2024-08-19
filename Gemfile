@@ -30,6 +30,7 @@ group :development, :test do
   gem 'rubocop-rspec_rails'
   gem 'slim_lint'
   gem 'faker'
+  gem "shoulda-matchers"
 end
 
 group :development do
