@@ -5,7 +5,6 @@ require 'shoulda/matchers'
 
 RSpec.describe Client do
   describe 'validations' do
-
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_presence_of(:password) }
@@ -16,6 +15,7 @@ RSpec.describe Client do
 
     describe 'validate_uniqueness' do
       before { create(:client) }
+
       it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
     end
   end
