@@ -35,3 +35,7 @@
               = text_field_tag :name, '田中太郎', class: 'form-control'
             .text-center
               = submit_tag '検索', class: 'btn btn-primary'
+    
+    .container.mt-5.mb-5
+      = week_calendar(number_of_weeks: 2) do |date| 
+        = date
