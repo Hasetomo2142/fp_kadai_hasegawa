@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'mini_racer'
 gem 'simple_calendar'
+gem 'kaminari'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
