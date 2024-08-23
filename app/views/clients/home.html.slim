@@ -1,4 +1,4 @@
-.container
+.container.bg-lite.p-5
   .row.mb-4
     .col-md-12.text-center
       h2 次回のミーティング
@@ -21,19 +21,21 @@
             .form-group
               label 時間
               = text_field_tag :time, '15:00〜15:30', class: 'form-control'
-            .text-center
+            .text-center.mt-3
               = submit_tag '検索', class: 'btn btn-primary'
 
     .col-md-5.d-flex.mx-md-5
       .card.w-100
         .card-header.text-center
           h3 プランナーから探す
+        .div.pt-3
         .card-body
           = form_tag '#', method: :get do
             .form-group
               label 名前
               = text_field_tag :name, '田中太郎', class: 'form-control'
-            .text-center
+            .div.pt-5
+            .text-center.mt.3
               = submit_tag '検索', class: 'btn btn-primary'
     
     .container.mt-5.mb-5
