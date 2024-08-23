@@ -8,10 +8,19 @@ module Planners
           if params[:date].present? 
             array = Planner.search_planners_by_date(params[:date])
             Kaminari.paginate_array(array).page(params[:page]).per(5)
+          elsif range_params[:date].present?
+            array = Planner.search_planners_by_range(range_params)
+            Kaminari.paginate_array(array).page(params[:page]).per(5)
           else
             Planner.page(params[:page]).per(5)
           end
       render 'planners/search'
+    end
+    
+    private
+
+    def range_params
+      params.require(:range).permit(:date, :start_time, :end_time)
     end
   end
 end
