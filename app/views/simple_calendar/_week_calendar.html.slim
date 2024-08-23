@@ -1,3 +1,4 @@
+- @is_client 
 .simple-calendar
   .calendar-heading.text-center.mb-3
     .d-flex.justify-content-center
@@ -25,6 +26,11 @@
             - date_range.slice(0, 6).each_with_index do |day, index|
               = content_tag :td, class: "text-center align-middle #{'bg-warning' if day == Date.today}" do
                 - # ダミーのハイフンをリンク付きで大きく表示
-                = link_to "-", "#", style: "font-size: 24px; font-weight: bold; text-decoration: none;"
+                - if @is_client
+                  = link_to "client", "#", style: "font-size: 24px; font-weight: bold; text-decoration: none;"
+                - else
+                  = link_to "planner", "#", style: "font-size: 24px; font-weight: bold; text-decoration: none;"
   .text-center.mt-3
     = link_to t('simple_calendar.next', default: 'Next Week'), calendar.url_for_next_view, class: 'btn btn-primary'
+
+= debug(params)
