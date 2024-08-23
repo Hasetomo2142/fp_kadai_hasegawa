@@ -9,6 +9,5 @@ class Client < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :email,
             format: { with: Devise.email_regexp },
-            uniqueness: true,
             uniqueness: { case_sensitive: true }
 end
