@@ -13,4 +13,10 @@ class Planner < ApplicationRecord
   validates :description, presence: true, length: { maximum: 255 }
 
   has_many :meetings, dependent: :destroy
+
+  class << self
+    def search_planners_by_date(date)
+      Planner.eager_load(:meetings).where(meetings: { start_time: date })
+    end
+  end
 end
