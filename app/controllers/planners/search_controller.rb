@@ -6,9 +6,10 @@ module Planners
     def search
       @planners = 
           if params[:date].present? 
-            Planner.search_planners_by_date(params[:date])
+            array = Planner.search_planners_by_date(params[:date])
+            Kaminari.paginate_array(array).page(params[:page]).per(5)
           else
-            Planner.all
+            Planner.page(params[:page]).per(5)
           end
       render 'planners/search'
     end
