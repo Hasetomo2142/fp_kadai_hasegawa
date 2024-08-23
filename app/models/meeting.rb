@@ -6,19 +6,15 @@ class Meeting < ApplicationRecord
   belongs_to :client, optional: true
   belongs_to :planner
 
-
   class << self
-
     def fetch_previous_and_next_three_month(current_date)
       previous_month = current_date.ago(3.months)
       next_month = current_date.since(3.months)
-      @current_meetings ||= begin
-        Meeting.where(start_time: previous_month..next_month)
-      end
+      @fetch_previous_and_next_three_month ||= Meeting.where(start_time: previous_month..next_month)
     end
 
     def count_empty_slots_in_frames
-      @current_meetings ||= fetch_previous_and_next_three_month(Time.now)
+      @current_meetings ||= fetch_previous_and_next_three_month(Time.zone.now)
       @grouped_meetings = @current_meetings.group_by(&:start_time)
     end
   end

@@ -5,7 +5,7 @@ module Clients
     before_action :authenticate_client!
     def home
       @groped_day = Meeting.count_empty_slots_in_frames
-      @meetings = Meeting.fetch_previous_and_next_three_month(Time.now)
+      @meetings = Meeting.fetch_previous_and_next_three_month(Time.zone.now)
       @is_client = true
       render 'clients/home'
     end
