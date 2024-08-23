@@ -4,11 +4,12 @@ module Planners
   class SearchController < ApplicationController
     before_action :authenticate_client!
     def search
-      if params[:date].present?
-        
-      else
-        # @planners = Planner.all
-      end
+      @planners = 
+          if params[:date].present? 
+            Planner.search_planners_by_date(params[:date])
+          else
+            Planner.all
+          end
       render 'planners/search'
     end
   end
