@@ -1,9 +1,18 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Plannerとその空き枠を作成する
+50.times do |i|
+  planner = Planner.create!(
+    name: "Planner#{i}",
+    email: "planner#{i}@seed.com",
+    description: "Planner#{i}です",
+    password: 'password',
+    password_confirmation: 'password'
+  )
+  10.times do |j|
+    start_time = Time.current.to_date + 10.hours + j*30.minutes
+    planner.meetings.create!(
+      start_time: start_time,
+      end_time: start_time + 30.minutes,
+    )
+  end
+end
+
