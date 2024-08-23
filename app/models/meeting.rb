@@ -10,7 +10,7 @@ class Meeting < ApplicationRecord
     def fetch_previous_and_next_three_month(current_date)
       previous_month = current_date.ago(3.months)
       next_month = current_date.since(3.months)
-      @fetch_previous_and_next_three_month ||= Meeting.where(start_time: previous_month..next_month)
+      @fetch_previous_and_next_three_month ||= Meeting.where(client_id: nil, start_time: previous_month..next_month)
     end
 
     def count_empty_slots_in_frames
