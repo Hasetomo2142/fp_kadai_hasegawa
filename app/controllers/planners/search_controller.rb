@@ -4,8 +4,12 @@ module Planners
   class SearchController < ApplicationController
     before_action :authenticate_client!
     def search
-      @planners = Planner.all
-      render 'planners/index'
+      if params[:date].present?
+        
+      else
+        # @planners = Planner.all
+      end
+      render 'planners/search'
     end
   end
 end
