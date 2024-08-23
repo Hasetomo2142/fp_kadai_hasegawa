@@ -1,0 +1,11 @@
+    .col-md-8.offset-md-2
+      .card.mb-3
+        .row.g-0.align-items-center
+          .col-md-2
+            = image_tag "icon.png", class: "img-fluid", alt: "Planner image"
+          .col-md-8
+            .card-body
+              h5 = planner.name
+              p = planner.description
+          .col-md-2.d-flex.align-items-center.justify-content-center
+            a.btn.btn-primary href="#" 予約
