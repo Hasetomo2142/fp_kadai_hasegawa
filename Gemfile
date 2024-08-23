@@ -20,6 +20,7 @@ gem 'sassc-rails'
 gem 'mini_racer'
 gem 'simple_calendar'
 gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'

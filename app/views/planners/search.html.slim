@@ -13,5 +13,7 @@
 
   ul.users
     = render partial: 'planners/planner', collection: @planners
-
-= debug(params)
+  .container.text-center
+    .pagination.justify-content-center
+      = paginate @planners, theme: 'bootstrap-5'
+    = debug(params)
