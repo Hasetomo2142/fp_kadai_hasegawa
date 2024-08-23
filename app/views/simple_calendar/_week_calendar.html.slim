@@ -25,7 +25,7 @@
             td
               = "#{hour.to_s.rjust(2, '0')}:#{minute}〜#{hour.to_s.rjust(2, '0')}:#{minute == '00' ? '30' : '00'}"
             - date_range.slice(0, 6).each_with_index do |day, index|
-              = content_tag :td, class: "text-center align-middle #{'bg-warning' if day == Date.today}" do
+              = content_tag :td, class: "text-center align-middle #{'bg-info bg-opacity-50' if day == Date.today}" do
                 - # ダミーのハイフンをリンク付きで大きく表示
                 - if @is_client
                   - start_time = convert_to_time_with_zone(day, hour, minute)
