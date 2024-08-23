@@ -8,8 +8,8 @@ class Planner < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email,
-    format: { with: Devise.email_regexp },
-    uniqueness: true,
-    uniqueness: { case_sensitive: true }
+            format: { with: Devise.email_regexp },
+            uniqueness: true,
+            uniqueness: { case_sensitive: true }
   validates :description, presence: true, length: { maximum: 255 }
 end
