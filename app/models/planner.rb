@@ -11,4 +11,6 @@ class Planner < ApplicationRecord
             format: { with: Devise.email_regexp },
             uniqueness: { case_sensitive: false }
   validates :description, presence: true, length: { maximum: 255 }
+
+  has_many :meetings, dependent: :destroy
 end

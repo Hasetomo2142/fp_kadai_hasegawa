@@ -1,7 +1,6 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  collation: utf8mb4_0900_ai_ci
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: <%= ENV.fetch("MYSQL_DB") { '' } %> #.env 環境変数を参照
   username: <%= ENV.fetch("MYSQL_USER") { '' } %> #.env 環境変数を参照
