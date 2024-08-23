@@ -7,5 +7,8 @@ class Client < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :email, length: { maximum: 255 }
+  validates :email,
+    format: { with: Devise.email_regexp },
+    uniqueness: true,
+    uniqueness: { case_sensitive: true }
 end

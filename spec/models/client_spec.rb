@@ -10,7 +10,6 @@ RSpec.describe Client do
     it { is_expected.to validate_presence_of(:password) }
 
     it { is_expected.to validate_length_of(:name).is_at_most(50) }
-    it { is_expected.to validate_length_of(:email).is_at_most(255) }
     it { is_expected.to validate_length_of(:password).is_at_least(6) }
 
     describe 'validate_uniqueness' do
@@ -35,6 +34,12 @@ RSpec.describe Client do
       client = build(:client, email: nil)
       client.valid?
       expect(client.errors[:email]).to include("can't be blank")
+    end
+
+    it 'is invalid wrong email format' do
+      client = build(:client, email: 'wrongemail')
+      client.valid?
+      expect(client.errors[:email]).to include('is invalid')
     end
   end
 end

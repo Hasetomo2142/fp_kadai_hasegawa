@@ -11,7 +11,6 @@ RSpec.describe Planner do
     it { is_expected.to validate_presence_of(:description) }
 
     it { is_expected.to validate_length_of(:name).is_at_most(50) }
-    it { is_expected.to validate_length_of(:email).is_at_most(255) }
     it { is_expected.to validate_length_of(:password).is_at_least(6) }
     it { is_expected.to validate_length_of(:description).is_at_most(255) }
 
@@ -49,6 +48,12 @@ RSpec.describe Planner do
       planner = build(:planner, description: nil)
       planner.valid?
       expect(planner.errors[:description]).to include("can't be blank")
+    end
+
+    it 'is invalid wrong email format' do
+      planner = build(:planner, email: 'wrongemail')
+      planner.valid?
+      expect(planner.errors[:email]).to include('is invalid')
     end
   end
 end
