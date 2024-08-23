@@ -15,19 +15,19 @@ class Planner < ApplicationRecord
   has_many :meetings, dependent: :destroy
 
   class << self
-    def search_planners_by_date(date)
-      Planner.includes(:meetings).where(meetings: { start_time: date })
+    def search_planners_by_empty_slot(date)
+      Planner.includes(:meetings).where(meetings: {client_id: nil, start_time: date })
     end
 
     def convert_to_datetime(date, time)
       Time.zone.parse("#{date} #{time}")
     end
 
-    def search_planners_by_range(range)
+    def search_planners_by_empty_range(range)
       start_datetime = convert_to_datetime(range[:date], range[:start_time])
       end_datetime = convert_to_datetime(range[:date], range[:end_time])
 
-      Planner.includes(:meetings).where(meetings: { start_time: start_datetime...end_datetime })
+      Planner.includes(:meetings).where(meetings: { client_id: nil, start_time: start_datetime...end_datetime })
     end
   end
 end
