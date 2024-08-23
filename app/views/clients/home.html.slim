@@ -14,16 +14,22 @@
         .card-header.text-center
           h3 日程から探す
         .card-body
-          = form_tag '#', method: :get do
+          = form_tag planners_search_path, method: :get do
             .form-group
               label 日付
-              = text_field_tag :date, '8月25日', class: 'form-control'
-            .form-group
-              label 時間
-              = text_field_tag :time, '15:00〜15:30', class: 'form-control'
+              = date_field_tag 'range[date]', Date.tomorrow, class: 'form-control', required: true, min: Date.tomorrow
+            .row
+              .col-md-6
+                .form-group
+                  label 開始時間
+                  = time_field_tag 'range[start_time]', '10:00', class: 'form-control', required: true, min: '10:00', max: '18:00'
+              .col-md-6
+                .form-group
+                  label 終了時間
+                  = time_field_tag 'range[end_time]', '18:00', class: 'form-control', required: true, min: '10:00', max: '18:00'
             .text-center.mt-3
-              = submit_tag '検索', class: 'btn btn-primary'
-
+              = submit_tag '検索', class: 'btn btn-primary', name: nil
+            
     .col-md-5.d-flex.mx-md-5
       .card.w-100
         .card-header.text-center

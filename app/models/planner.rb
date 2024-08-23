@@ -18,5 +18,18 @@ class Planner < ApplicationRecord
     def search_planners_by_date(date)
       Planner.eager_load(:meetings).where(meetings: { start_time: date })
     end
+
+    def convert_to_datetime(date, time)
+      DateTime.parse("#{date}T#{time}")
+    end
+
+    def search_planners_by_range(range)
+      start_datetime = convert_to_datetime(range[:date], range[:start_time])
+      end_datetime = convert_to_datetime(range[:date], range[:end_time])
+
+      Planner.eager_load(:meetings).where(meetings: { 
+        start_time: start_datetime..end_datetime,
+      })
+    end
   end
 end
