@@ -16,5 +16,10 @@ class Meeting < ApplicationRecord
         Meeting.where(start_time: previous_month..next_month)
       end
     end
+
+    def count_empty_slots_in_frames
+      @current_meetings ||= fetch_previous_and_next_three_month(Time.now)
+      @grouped_meetings = @current_meetings.group_by(&:start_time)
+    end
   end
 end
