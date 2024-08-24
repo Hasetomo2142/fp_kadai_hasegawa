@@ -1,8 +1,7 @@
-# frozen_string_literal: true
-
 module Meetings
-  class SearchController < ApplicationController
+  class MeetingsController < ApplicationController
     before_action :authenticate_client!
+
     def search
       @meetings =
           if params[:date].present?
@@ -17,6 +16,21 @@ module Meetings
             Meeting.page(params[:page]).per(5)
           end
       render 'meetings/search'
+    end
+
+    def index
+      @meetings = Meeting.all
+    end
+
+    def edit
+      redirect_to root_path
+    end
+
+    def update
+      @meeting = Meeting.find(params[:id])
+      @meeting.update(client_id: current_client.id)
+      flash[:notice] = '予約が完了しました'
+      redirect_to clients_home_path
     end
     
     private

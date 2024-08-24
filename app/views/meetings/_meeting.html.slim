@@ -8,4 +8,5 @@
               h5 = meeting.planner.name
               p = meeting.planner.description
           .col-md-2.d-flex.align-items-center.justify-content-center
-            a.btn.btn-primary href="#" 予約
+            = button_to "予約", meeting_path(meeting), method: :put, class: "btn btn-primary"
+
