@@ -17,5 +17,21 @@ class Meeting < ApplicationRecord
       @current_meetings ||= fetch_previous_and_next_three_month(Time.zone.now)
       @grouped_meetings = @current_meetings.group_by(&:start_time)
     end
+
+    def search_meetings_by_empty_slot(date)
+      Meeting.includes(:planner).where(client_id: nil, start_time: date)
+    end
+
+    def convert_to_datetime(date, time)
+      Time.zone.parse("#{date} #{time}")
+    end
+
+    def search_meetings_by_empty_range(range)
+      start_datetime = convert_to_datetime(range[:date], range[:start_time])
+      end_datetime = convert_to_datetime(range[:date], range[:end_time])
+
+      Meeting.includes(:planner).where(client_id: nil, start_time: start_datetime...end_datetime)
+    end
+
   end
 end

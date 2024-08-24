@@ -31,7 +31,7 @@
                   - start_time = convert_to_time_with_zone(day, hour, minute)
                   -if start_time > Time.zone.now
                     - count = @groped_day[start_time]&.count || 0
-                    = link_to "#{convert_empty_slot_to_symbol(count)}", planners_search_path(date: start_time), style: "font-size: 24px; font-weight: bold; text-decoration: none;"
+                    = link_to "#{convert_empty_slot_to_symbol(count)}", meetings_search_path(date: start_time), style: "font-size: 24px; font-weight: bold; text-decoration: none;"
                   - else
                     | -
                 - else
