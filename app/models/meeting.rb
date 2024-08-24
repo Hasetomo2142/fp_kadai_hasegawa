@@ -32,6 +32,5 @@ class Meeting < ApplicationRecord
 
       Meeting.includes(:planner).where(client_id: nil, start_time: start_datetime...end_datetime)
     end
-
   end
 end

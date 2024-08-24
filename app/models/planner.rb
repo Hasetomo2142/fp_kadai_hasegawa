@@ -16,7 +16,7 @@ class Planner < ApplicationRecord
 
   class << self
     def search_planners_by_empty_slot(date)
-      Planner.includes(:meetings).where(meetings: {client_id: nil, start_time: date })
+      Planner.includes(:meetings).where(meetings: { client_id: nil, start_time: date })
     end
 
     def convert_to_datetime(date, time)
