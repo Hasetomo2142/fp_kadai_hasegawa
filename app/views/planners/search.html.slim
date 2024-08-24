@@ -5,11 +5,7 @@
     .col-md-12.text-center
       h2.font-weight-bold.text-primary 日程から探す
 
-  / Row for the search result heading and date
-  .row.mb-4
-    .col-md-12.text-center
-      h4 検索結果
-      p 日時: 8/25日 14:30〜15:00
+  = render partial: 'planners/search_result'
 
   ul.users
     = render partial: 'planners/planner', collection: @planners
