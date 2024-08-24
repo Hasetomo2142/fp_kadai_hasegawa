@@ -15,7 +15,7 @@ module ApplicationHelper
 
   def convert_empty_slot_to_symbol(empty_slot)
     case empty_slot
-      
+
     when 6..Float::INFINITY
       '○'
     when 1..5
