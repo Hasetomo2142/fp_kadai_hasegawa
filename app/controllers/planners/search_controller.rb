@@ -6,9 +6,11 @@ module Planners
     def search
       @planners = 
           if params[:date].present? 
+            @date = params[:date]
             array = Planner.search_planners_by_empty_slot(params[:date])
             Kaminari.paginate_array(array).page(params[:page]).per(5)
           elsif range_params[:date].present?
+            @range = range_params
             array = Planner.search_planners_by_empty_range(range_params)
             Kaminari.paginate_array(array).page(params[:page]).per(5)
           else
