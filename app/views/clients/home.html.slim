@@ -14,7 +14,7 @@
         .card-header.text-center
           h3 日程から探す
         .card-body
-          = form_tag planners_search_path, method: :get do
+          = form_tag meetings_search_path, method: :get do
             .form-group
               label 日付
               = date_field_tag 'range[date]', Date.tomorrow, class: 'form-control', required: true, min: Date.tomorrow

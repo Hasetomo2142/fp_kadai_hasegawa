@@ -4,28 +4,20 @@ Rails.application.routes.draw do
     passwords:     'planners/passwords',
     registrations: 'planners/registrations'
   }
+  get "planners/search" => "planners/search#search", as: :planners_search
+
   devise_for :clients, controllers: {
     sessions:      'clients/sessions',
     passwords:     'clients/passwords',
     registrations: 'clients/registrations'
   }
+  get "clients/home" => "clients/home#home", as: :clients_home
+
+  get "meetings/search" => "meetings/search#search", as: :meetings_search
+
   root "static_pages#home"
   get "static_pages/help"
   get "static_pages/about"
 
-  get "clients/home" => "clients/home#home", as: :clients_home
-  get "planners/search" => "planners/search#search", as: :planners_search
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
-  # Defines the root path route ("/")
-  # root "posts#index"
+  resources :meetings
 end
