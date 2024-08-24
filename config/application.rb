@@ -25,6 +25,9 @@ module App
     config.autoload_lib(ignore: %w[assets tasks])
     config.generators.system_tests = nil
     config.generators.template_engine = :slim #slimに変更
+    # 2行追記:デフォルトのlocaleを日本語(:ja)にする.
+    config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.generators do |g|
       g.assets false
       g.helper     false

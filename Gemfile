@@ -21,6 +21,9 @@ gem 'mini_racer'
 gem 'simple_calendar'
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
