@@ -5,5 +5,6 @@ FactoryBot.define do
     start_time { Time.now }
     end_time { Time.now + 30.minutes }
     association :planner
+    # association :client
   end
 end
