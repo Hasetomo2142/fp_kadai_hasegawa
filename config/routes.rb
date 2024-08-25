@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     passwords:     'planners/passwords',
     registrations: 'planners/registrations'
   }
+  resources :planners, controller: 'planners/planners', only: %i[index show]
   get "planners/search" => "planners/search#search", as: :planners_search
 
   devise_for :clients, controllers: {
