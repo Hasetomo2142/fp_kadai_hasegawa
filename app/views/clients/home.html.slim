@@ -34,14 +34,17 @@
       .card.w-100
         .card-header.text-center
           h3 プランナーから探す
-        .div.pt-3
         .card-body
-          = form_tag '#', method: :get do
+          = form_tag planners_search_path, method: :get do
             .form-group
               label 名前
-              = text_field_tag :name, '田中太郎', class: 'form-control'
-            .div.pt-5
+              = text_field_tag :name, nil, placeholder: '名前を入力', class: 'form-control'
             .text-center.mt.3
+          = form_tag planners_search_path, method: :get do
+            .form-group
+              label キーワード
+              = text_field_tag :keyword, nil, placeholder: 'キーワードを入力', class: 'form-control'
+            .text-center.mt-3.3
               = submit_tag '検索', class: 'btn btn-primary'
     
     .container.mt-5.mb-5
