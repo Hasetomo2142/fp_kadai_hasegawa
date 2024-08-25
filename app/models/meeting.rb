@@ -10,7 +10,8 @@ class Meeting < ApplicationRecord
   validates :end_time, presence: true
   validates :planner_id, presence: true
   validate :end_time_after_start_time
-  validate :prevent_duplicate_slot_for_planner
+  validate :prevent_duplicate_slot_for_planner, on: :create
+  validate :prevent_overwrite_existing_client, on: :update
 
   class << self
     def fetch_previous_and_next_three_month(current_date)
@@ -51,6 +52,13 @@ class Meeting < ApplicationRecord
     return if start_time.blank? || end_time.blank?
     if Meeting.where(planner_id: planner_id, start_time: start_time).exists?
       errors.add(:start_time, 'は既に予定されています')
+    end
+  end
+
+  def prevent_overwrite_existing_client
+    return if client_id.blank?
+    if will_save_change_to_client_id?
+      errors.add(:start_time, 'この枠は既に埋まっています')
     end
   end
 end
