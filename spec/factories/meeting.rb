@@ -4,7 +4,14 @@ FactoryBot.define do
   factory :meeting do
     start_time { Time.now }
     end_time { Time.now + 30.minutes }
-    association :planner
-    # association :client
+
+    factory :empty_slot do
+      association :planner
+    end
+
+    factory :reservation do
+      association :planner
+      association :client
+    end
   end
 end
