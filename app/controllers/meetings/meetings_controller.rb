@@ -38,7 +38,7 @@ module Meetings
       begin
         meeting.update!(client_id: current_client.id)
       rescue StandardError
-        flash[:alert] = meeting.errors[:start_time].to_s
+        flash[:alert] = "予約に失敗しました：" + meeting.errors[:start_time].first
         redirect_to clients_home_path
         return
       end

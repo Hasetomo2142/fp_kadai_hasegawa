@@ -4,9 +4,18 @@
       h2 次回のミーティング
       .card
         .card-body
-          p 8/14 18:30〜19:00
-          p 田中 太郎
+        - if @next_meeting
+          h3.mb-4
+            = "#{@next_meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{@next_meeting.end_time.strftime('%H:%M')}の枠"
+          h3.mb-4 
+            = @next_meeting.planner.name
+        - else
+          h3.mb-4 予定はありません
+
+    - if @next_meeting
       a href= meetings_path class="btn btn-link" 全ての予定を確認
+    - else
+      .container.mb-5
 
   .row.justify-content-center
     .col-md-5.d-flex.mx-md-5
