@@ -21,6 +21,10 @@ module Meetings
       render 'meetings/search'
     end
 
+    def cancel
+      meeting = Meeting.find(params[:id])
+    end
+
     def index
       # @meetings = Meeting.all
       @meetings = Meeting.where("client_id = ? AND start_time > ?", current_client.id, Time.zone.now).order(start_time: 'ASC').page(params[:page]).per(5)
@@ -43,6 +47,18 @@ module Meetings
       end
       flash[:notice] = '予約が完了しました'
       redirect_to clients_home_path
+    end
+
+    def cancel
+      meeting = Meeting.find(params[:id])
+      if meeting.client_id != current_client.id
+        flash[:alert] = '他のユーザーの予約はキャンセルできません'
+        redirect_to clients_home_path
+      else
+        meeting.update_columns(client_id: nil)
+        flash[:notice] = '予約をキャンセルしました'
+        redirect_to meetings_path
+      end
     end
 
     private

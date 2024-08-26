@@ -6,7 +6,7 @@
       h2.font-weight-bold.text-primary 予約一覧
 
   ul.users
-    = render partial: 'meetings/meeting_reservation', collection: @meetings, as: :meeting
+    = render partial: 'meetings/meeting_cancel', collection: @meetings, as: :meeting
   .container.text-center
     .pagination.justify-content-center
       = paginate @meetings, theme: 'bootstrap-5'

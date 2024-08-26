@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :meetings, controller: 'meetings/meetings', only: %i[index new create edit update destroy]
   get "search/meetings" => "meetings/meetings#search", as: :meetings_search
+  post "meetings/:id/cancel" => "meetings/meetings#cancel", as: :meetings_cancel
 
   root "static_pages#home"
   get "static_pages/help"
