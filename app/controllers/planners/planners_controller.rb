@@ -23,11 +23,5 @@ module Planners
       @planners = @planners.page(params[:page]).per(5)
       render 'planners/search'
     end
-
-    private
-
-    def planner_params
-      params.require(:planner).permit(:name, :description)
-    end
   end
 end
