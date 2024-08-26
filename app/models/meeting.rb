@@ -11,6 +11,7 @@ class Meeting < ApplicationRecord
   validates :planner_id, presence: true
   validate :end_time_after_start_time
   validate :prevent_duplicate_slot_for_planner, on: :create
+  validate :prevent_duplicate_slot_for_client, on: :update
   validate :prevent_overwrite_existing_client, on: :update
 
   class << self
@@ -61,7 +62,7 @@ class Meeting < ApplicationRecord
     return if start_time.blank? || end_time.blank?
 
     if Meeting.exists?(client_id: client_id, start_time: start_time)
-      errors.add(:start_time, 'は既に予定されています')
+      errors.add(:start_time, '同じ時間の予約があります')
     end
   end
 

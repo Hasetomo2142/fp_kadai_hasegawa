@@ -29,11 +29,11 @@ module Meetings
     end
 
     def update
-      @meeting = Meeting.find(params[:id])
+      meeting = Meeting.find(params[:id])
       begin
-        @meeting.update!(client_id: current_client.id)
-      rescue StandardError
-        flash[:alert] = '予約に失敗しました'
+        meeting.update!(client_id: current_client.id)
+      rescue 
+        flash[:alert] = meeting.errors[:start_time].to_s
         redirect_to clients_home_path
         return
       end
