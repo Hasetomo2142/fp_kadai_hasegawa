@@ -32,7 +32,7 @@ module Meetings
       meeting = Meeting.find(params[:id])
       begin
         meeting.update!(client_id: current_client.id)
-      rescue 
+      rescue StandardError
         flash[:alert] = meeting.errors[:start_time].to_s
         redirect_to clients_home_path
         return

@@ -25,11 +25,11 @@ RSpec.describe Meeting do
     end
 
     it 'is invalid when trying to overwrite an existing client' do
-      client_1 = create(:client)
-      client_2 = create(:client)
+      client1 = create(:client)
+      client2 = create(:client)
 
-      reservation = create(:reservation, client_id: client_1.id)
-      reservation.update(client_id: client_2.id)
+      reservation = create(:reservation, client_id: client1.id)
+      reservation.update(client_id: client2.id)
       expect(reservation.errors[:start_time]).to include('この枠は既に埋まっています')
     end
   end
