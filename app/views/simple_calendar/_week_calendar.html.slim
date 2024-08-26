@@ -23,15 +23,25 @@
           tr
             - # 左端の時間列に時間範囲を表示
             td
-              = "#{hour.to_s.rjust(2, '0')}:#{minute}〜#{hour.to_s.rjust(2, '0')}:#{minute == '00' ? '30' : '00'}"
+              = "#{hour.to_s.rjust(2, '0')}:#{minute.to_s.rjust(2, '0')}〜#{(minute.to_i == 0 ? hour : hour + 1).to_s.rjust(2, '0')}:#{minute.to_i == 0 ? '30' : '00'}"
             - date_range.slice(0, 6).each_with_index do |day, index|
               = content_tag :td, class: "text-center align-middle #{'bg-info bg-opacity-50' if day == Date.today}" do
                 - # ダミーのハイフンをリンク付きで大きく表示
                 - start_time = convert_to_time_with_zone(day, hour, minute)
-                - if @is_client_page
-                  - render 'simple_calendar/client_page', start_time: start_time
-                - elsif @is_planner_page # plannerの表示
-                  - render 'simple_calendar/planner_page', start_time: start_time
+                - # 土曜日の予約枠は 11:00〜15:00
+                - if index == 5
+                  - if convert_to_time_with_zone(day, 11, 00) <= start_time && start_time < convert_to_time_with_zone(day, 15, 00)
+                    - if @is_client_page
+                      - render 'simple_calendar/client_page', start_time: start_time
+                    - elsif @is_planner_page # plannerの表示
+                      - render 'simple_calendar/planner_page', start_time: start_time
+                  - else
+                    | -
+                - else
+                  - if @is_client_page
+                    - render 'simple_calendar/client_page', start_time: start_time
+                  - elsif @is_planner_page # plannerの表示
+                    - render 'simple_calendar/planner_page', start_time: start_time
 
   .text-center.mt-3
     = link_to t('simple_calendar.next', default: 'Next Week'), calendar.url_for_next_view, class: 'btn btn-primary'
