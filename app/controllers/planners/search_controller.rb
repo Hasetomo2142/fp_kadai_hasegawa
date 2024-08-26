@@ -8,12 +8,13 @@ module Planners
       @planners = Planner.all
 
       if params[:name].present? && params[:keyword].present?
-        @planners = @planners.where("name LIKE ? AND (name LIKE ? OR description LIKE ?)", 
+        @planners = @planners.where('name LIKE ? AND (name LIKE ? OR description LIKE ?)',
                                     "%#{params[:name]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
       elsif params[:name].present?
-        @planners = @planners.where("name LIKE ?", "%#{params[:name]}%")
+        @planners = @planners.where('name LIKE ?', "%#{params[:name]}%")
       elsif params[:keyword].present?
-        @planners = @planners.where("name LIKE ? OR description LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+        @planners = @planners.where('name LIKE ? OR description LIKE ?', "%#{params[:keyword]}%",
+                                    "%#{params[:keyword]}%")
       end
 
       @planners = @planners.page(params[:page]).per(5)

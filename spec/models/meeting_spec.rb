@@ -16,10 +16,10 @@ RSpec.describe Meeting do
     end
 
     it 'is invaild that duplicate slot for plannner' do
-      start_time = Time.new(2024, 1, 1, 10, 0, 0) # Replace with your desired start time
-      end_time = Time.new(2024, 1, 1, 10, 30, 0) # Replace with your desired end time
-      tmp_slot = create(:empty_slot, start_time: start_time, end_time: end_time)
-      empty_slot = build(:empty_slot, start_time: start_time, end_time: end_time, planner_id: tmp_slot.planner_id)
+      start_time = Time.zone.local(2024, 1, 1, 10, 0, 0) # Replace with your desired start time
+      end_time = Time.zone.local(2024, 1, 1, 10, 30, 0) # Replace with your desired end time
+      tmp_slot = create(:empty_slot, start_time:, end_time:)
+      empty_slot = build(:empty_slot, start_time:, end_time:, planner_id: tmp_slot.planner_id)
       empty_slot.valid?
       expect(empty_slot.errors[:start_time]).to include('は既に予定されています')
     end

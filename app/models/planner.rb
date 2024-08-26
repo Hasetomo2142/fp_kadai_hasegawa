@@ -14,6 +14,10 @@ class Planner < ApplicationRecord
 
   has_many :meetings, dependent: :destroy
 
+  def fetch_empty_slots
+    Meeting.where(client_id: nil, planner_id: id, start_time: Time.zone.now..3.months.since)
+  end
+
   class << self
     def search_planners_by_empty_slot(date)
       Planner.includes(:meetings).where(meetings: { client_id: nil, start_time: date })
