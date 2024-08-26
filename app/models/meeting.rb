@@ -58,8 +58,6 @@ class Meeting < ApplicationRecord
 
   def prevent_overwrite_existing_client
     return if @client_id.nil?
-
-    raise
     return unless will_save_change_to_client_id?
 
     errors.add(:start_time, 'この枠は既に埋まっています')
