@@ -57,6 +57,14 @@ class Meeting < ApplicationRecord
     end
   end
 
+  def prevent_duplicate_slot_for_client
+    return if start_time.blank? || end_time.blank?
+
+    if Meeting.exists?(client_id: client_id, start_time: start_time)
+      errors.add(:start_time, 'は既に予定されています')
+    end
+  end
+
   def prevent_overwrite_existing_client
     return if client_id_was.nil?  # 古いclient_idがnilならスキップ（初回登録など）
     return unless will_save_change_to_client_id?  # client_idが変更されないならスキップ
