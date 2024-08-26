@@ -42,7 +42,7 @@ module Meetings
         redirect_to clients_home_path
         return
       end
-      flash[:notice] = '予約が完了しました'
+      flash[:notice] = '予約が完了しました　　' + "#{meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{meeting.end_time.strftime('%H:%M')}の枠"
       redirect_to clients_home_path
     end
 
