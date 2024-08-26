@@ -17,18 +17,15 @@ module Meetings
         else
           Meeting.page(params[:page]).per(5)
         end
-      @is_reservation_page= false
+      @is_reservation_page = false
       render 'meetings/search'
-    end
-
-    def cancel
-      meeting = Meeting.find(params[:id])
     end
 
     def index
       # @meetings = Meeting.all
-      @meetings = Meeting.where("client_id = ? AND start_time > ?", current_client.id, Time.zone.now).order(start_time: 'ASC').page(params[:page]).per(5)
-      @is_reservation_page= true
+      @meetings = Meeting.where('client_id = ? AND start_time > ?', current_client.id,
+                                Time.zone.now).order(start_time: 'ASC').page(params[:page]).per(5)
+      @is_reservation_page = true
       render 'meetings/index'
     end
 
@@ -51,13 +48,15 @@ module Meetings
 
     def cancel
       meeting = Meeting.find(params[:id])
-      if meeting.client_id != current_client.id
-        flash[:alert] = '他のユーザーの予約はキャンセルできません'
-        redirect_to clients_home_path
-      else
+      if meeting.client_id == current_client.id
+        # rubocop:disable Rails/SkipsModelValidations
         meeting.update_columns(client_id: nil)
+        # rubocop:enable Rails/SkipsModelValidations
         flash[:notice] = '予約をキャンセルしました'
         redirect_to meetings_path
+      else
+        flash[:alert] = '他のユーザーの予約はキャンセルできません'
+        redirect_to clients_home_path
       end
     end
 
