@@ -14,12 +14,11 @@ Rails.application.routes.draw do
   }
   get "clients/home" => "clients/home#home", as: :clients_home
 
-  resources :meetings, controller: 'meetings/meetings', only: %i[new create edit update destroy]
+  resources :meetings, controller: 'meetings/meetings', only: %i[index new create edit update destroy]
   get "search/meetings" => "meetings/meetings#search", as: :meetings_search
 
   root "static_pages#home"
   get "static_pages/help"
   get "static_pages/about"
 
-  resources :meetings
 end

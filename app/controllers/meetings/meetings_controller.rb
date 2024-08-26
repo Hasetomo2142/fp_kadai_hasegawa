@@ -17,11 +17,15 @@ module Meetings
         else
           Meeting.page(params[:page]).per(5)
         end
+      @is_reservation_page= false
       render 'meetings/search'
     end
 
     def index
-      @meetings = Meeting.all
+      # @meetings = Meeting.all
+      @meetings = Meeting.where("client_id = ? AND start_time > ?", current_client.id, Time.zone.now).page(params[:page]).per(5)
+      @is_reservation_page= true
+      render 'meetings/index'
     end
 
     def edit
