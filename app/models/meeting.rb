@@ -8,6 +8,7 @@ class Meeting < ApplicationRecord
 
   validates :start_time, presence: true
   validates :end_time, presence: true
+  validates :planner_id, presence: true
   validate :end_time_after_start_time
   validate :prevent_duplicate_slot_for_planner, on: :create
   validate :prevent_duplicate_slot_for_client, on: :update
