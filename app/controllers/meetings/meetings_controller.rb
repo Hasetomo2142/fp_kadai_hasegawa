@@ -27,12 +27,14 @@ module Meetings
         @meetings = Meeting.where(client_id: current_client.id,
                                 start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
         @is_reservation_page = true
+        render 'meetings/index_for_client'
       elsif current_planner
         @meetings = Meeting.where(planner_id: current_planner.id,
                                 start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
+        @reservation = @meetings.where.not(client_id: nil)
+        render 'meetings/index_for_planner'
       end
 
-      render 'meetings/index'
     end
 
     def edit

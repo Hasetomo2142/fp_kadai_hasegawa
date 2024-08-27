@@ -1,0 +1,15 @@
+/ Container with background and padding as requested
+.container.bg-lite.p-5
+  / Row for the date search section
+  .row.mb-4
+    .col-md-12.text-center
+      h2.font-weight-bold.text-primary 予約一覧
+
+  ul.users
+    = render partial: 'meetings/meeting_contact', collection: @reservation, as: :reservation
+  .container.text-center
+    .pagination.justify-content-center
+      = paginate @reservation, theme: 'bootstrap-5'
+
+    .text-center.mt-5.mb-4
+      a href= get_home_path class="btn btn-outline-dark w-50" ホームに戻る
