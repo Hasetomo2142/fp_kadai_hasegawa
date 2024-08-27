@@ -29,9 +29,9 @@ module Meetings
         @is_reservation_page = true
         render 'meetings/index_for_client'
       elsif current_planner
-        @meetings = Meeting.where('planner_id = ? AND start_time > ?', current_planner.id,
-                                  Time.zone.now).order(start_time: 'ASC').page(params[:page]).per(5)
+        @meetings = Meeting.where('planner_id = ?', current_planner.id).order(start_time: 'ASC').page(params[:page]).per(5)
         @reservation = @meetings.where.not(client_id: nil)
+        @slot = @meetings.where(client_id: nil, start_time: Time.zone.now..Time.zone.now.since(3.months))
         render 'meetings/index_for_planner'
       end
     end

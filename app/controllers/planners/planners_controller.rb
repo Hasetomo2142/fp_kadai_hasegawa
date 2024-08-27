@@ -5,7 +5,12 @@ module Planners
     before_action :authenticate_user!
 
     def home
+      redirect_to root_path if !current_planner
       @next_meeting = find_next_meeting
+      @is_planner_page = true
+      @role = 'planner'
+      @reservations = Meeting.where(planner_id: current_planner.id).where.not(client_id: nil)
+      @empty_slots = Meeting.where(planner_id: current_planner.id, client_id: nil)
       render 'planners/home'
     end
 
