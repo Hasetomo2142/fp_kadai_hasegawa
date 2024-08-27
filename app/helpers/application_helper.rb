@@ -24,4 +24,27 @@ module ApplicationHelper
       '×'
     end
   end
+
+  def is_logged_in?
+    return true if current_client || current_planner
+    false
+  end
+
+  def client_or_planner
+    if current_client
+      'client'
+    else
+      'planner'
+    end
+  end
+
+  def get_home_path
+    if current_client
+      clients_home_path
+    elsif current_planner
+      planners_path
+    else
+      root_path
+    end
+  end
 end

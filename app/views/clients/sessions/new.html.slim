@@ -1,24 +1,22 @@
 .container.mt-5
   .row
-    .col-md-6.offset-md-3
-      h2
-        | Log in
+    .col-md-6.offset-md-3.bg-white.rounded-4.shadow-lg.p-5
+      h2.text-center
+        | Log in as a client
       = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal" }) do |f|
-        .form-group
+        .form-group.mb-2
           = f.label :email, class: "col-sm-2 control-label"
-          .col-sm-10
-            = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
-        .form-group
+          br
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+        .form-group.mb-2
           = f.label :password, class: "col-sm-2 control-label"
-          .col-sm-10
-            = f.password_field :password, autocomplete: "current-password", class: "form-control"
+          br
+          = f.password_field :password, autocomplete: "current-password", class: "form-control"
         - if devise_mapping.rememberable?
-          .form-group
-            .col-sm-offset-2.col-sm-10
-              .checkbox
+          .form-group.mb-2
+            .checkbox
                 = f.check_box :remember_me, class: "form-check-input"
                 = f.label :remember_me, class: "form-check-label"
-        .form-group
-          .col-sm-offset-2.col-sm-10
-            = f.submit "Log in", class: "btn btn-primary"
+        .form-group.mb-2.mt-3
+          = f.submit "Log in", class: "btn btn-outline-dark w-100"
       = render "devise/shared/links"
