@@ -9,7 +9,7 @@
           h3.mb-4
             = "#{@next_meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{@next_meeting.end_time.strftime('%H:%M')}の枠"
           h3.mb-4 
-            = link_to @next_meeting.client.name, planner_path(@next_meeting.planner)
+            = link_to @next_meeting.client.name, 'mailto:#{client.email}'
         - else
           h3.mb-4 予定はありません
         - if @next_meeting
