@@ -13,11 +13,12 @@ gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
 gem 'ridgepole', '~> 2.1'
 gem 'slim-rails'
-gem 'html2slim'
+gem "html2slim", github: "slim-template/html2slim"
 gem 'bootstrap', '~> 5.3.0'
 gem 'jquery-rails'
 gem 'sassc-rails'
 gem 'mini_racer'
+gem 'simple_calendar'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'

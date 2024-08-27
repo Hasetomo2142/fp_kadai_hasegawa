@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/slim-template/html2slim.git
+  revision: e92e6bb80570dce0c413a6ff01b858754845df24
+  specs:
+    html2slim (0.2.0)
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -114,9 +121,6 @@ GEM
     ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    hpricot (0.8.6)
-    html2slim (0.2.0)
-      hpricot
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -293,6 +297,8 @@ GEM
     securerandom (0.3.1)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
+    simple_calendar (3.0.4)
+      rails (>= 6.1)
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
@@ -353,7 +359,7 @@ DEPENDENCIES
   devise (~> 4.9)
   factory_bot_rails
   faker
-  html2slim
+  html2slim!
   importmap-rails
   jbuilder
   jquery-rails
@@ -372,6 +378,7 @@ DEPENDENCIES
   rubocop-rspec_rails
   sassc-rails
   shoulda-matchers
+  simple_calendar
   slim-rails
   slim_lint
   spring-commands-rspec
