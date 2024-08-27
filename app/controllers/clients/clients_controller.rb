@@ -30,7 +30,7 @@ module Clients
 
     def authenticate_user!
       if current_client.nil? && current_planner.nil?
-        flash[:alert] = 'ログインもしくはアカウント登録してください。' 
+        flash[:alert] = 'ログインもしくはアカウント登録してください。'
         redirect_to root_path
       elsif current_client
         authenticate_client!
