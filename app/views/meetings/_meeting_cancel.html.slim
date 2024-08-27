@@ -1,3 +1,3 @@
-= render 'meetings/meeting', meeting: meeting do 
+= render 'meetings/meeting_for_client', meeting: meeting do 
   .col-md-2.d-flex.align-items-center.justify-content-center
     = button_to 'キャンセル', meetings_cancel_path(meeting), method: :post, class: "btn btn-danger"
