@@ -4,6 +4,10 @@ module Planners
   class PlannersController < ApplicationController
     before_action :authenticate_client!
 
+    def home
+      render 'planners/home'
+    end
+
     def show
       @planner = Planner.find(params[:id])
       @is_planner_page = true
