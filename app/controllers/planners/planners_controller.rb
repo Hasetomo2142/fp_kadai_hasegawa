@@ -5,7 +5,7 @@ module Planners
     before_action :authenticate_user!
 
     def home
-      redirect_to root_path if !current_planner
+      redirect_to root_path unless current_planner
       @next_meeting = find_next_meeting
       @is_planner_page = true
       @role = 'planner'
