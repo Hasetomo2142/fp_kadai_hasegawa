@@ -52,7 +52,7 @@ module Planners
     # end
 
     # The path used after sign up.
-    def after_sign_up_path_for(resource)
+    def after_sign_up_path_for(_resource)
       planners_home_path
     end
 
