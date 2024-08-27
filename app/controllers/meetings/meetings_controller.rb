@@ -2,7 +2,7 @@
 
 module Meetings
   class MeetingsController < ApplicationController
-    before_action :authenticate_client!
+    before_action :authenticate_user!
 
     def search
       @meetings =
@@ -22,9 +22,16 @@ module Meetings
     end
 
     def index
-      @meetings = Meeting.where(client_id: current_client.id,
+      # @meetings = Meeting.all
+      if current_client
+        @meetings = Meeting.where(client_id: current_client.id,
                                 start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
-      @is_reservation_page = true
+        @is_reservation_page = true
+      elsif current_planner
+        @meetings = Meeting.where(planner_id: current_planner.id,
+                                start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
+      end
+
       render 'meetings/index'
     end
 
@@ -64,6 +71,17 @@ module Meetings
 
     def range_params
       params.require(:range).permit(:date, :start_time, :end_time)
+    end
+
+    def authenticate_user!
+      if current_client.nil? && current_planner.nil?
+        flash[:alert] = 'ログインもしくはアカウント登録してください。' 
+        redirect_to root_path
+      elsif current_client
+        authenticate_client!
+      elsif current_planner
+        authenticate_planner!
+      end
     end
   end
 end
