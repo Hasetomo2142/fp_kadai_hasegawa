@@ -23,7 +23,9 @@ module Clients
     end
 
     def find_next_meeting
-      Meeting.all.order(start_time: :asc).find { |meeting| meeting.client_id == current_client.id && meeting.start_time > Time.zone.now }
+      Meeting.order(start_time: :asc).find do |meeting|
+        meeting.client_id == current_client.id && meeting.start_time > Time.zone.now
+      end
     end
   end
 end
