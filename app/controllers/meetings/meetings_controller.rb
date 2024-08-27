@@ -4,6 +4,11 @@ module Meetings
   class MeetingsController < ApplicationController
     before_action :authenticate_user!
 
+    def new
+      @meeting = Meeting.create!(planner_id: current_planner.id, start_time: params[:start_time], end_time: params[:end_time])
+      redirect_to planners_home_path
+    end
+
     def search
       @meetings =
         if params[:date].present?
@@ -36,10 +41,6 @@ module Meetings
       end
     end
 
-    def edit
-      redirect_to root_path
-    end
-
     def update
       meeting = Meeting.find(params[:id])
       begin
@@ -65,6 +66,23 @@ module Meetings
       else
         flash[:alert] = '他のユーザーの予約はキャンセルできません'
         redirect_to clients_home_path
+      end
+    end
+
+    def destroy
+      if current_planner.nil?
+        flash[:alert] = 'プランナー権限がありません'
+        redirect_to root_path
+        return
+      end
+      meeting = Meeting.find(params[:id])
+      if meeting.planner_id == current_planner.id && meeting.client_id.nil?
+        meeting.destroy
+        flash[:notice] = '空き枠を削除しました'
+        redirect_to planners_home_path
+      else
+        flash[:alert] = '権限がありません'
+        redirect_to planners_home_path
       end
     end
 

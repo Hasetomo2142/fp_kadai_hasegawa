@@ -44,7 +44,7 @@ module Planners
 
     def find_next_meeting
       Meeting.order(start_time: :asc).find do |meeting|
-        meeting.planner_id == current_planner.id && meeting.start_time > Time.zone.now
+        meeting.planner_id == current_planner.id && meeting.start_time > Time.zone.now && !meeting.client_id.nil?
       end
     end
 
