@@ -44,7 +44,7 @@ module ApplicationHelper
     if current_client
       clients_home_path
     elsif current_planner
-      planners_path
+      planners_home_path
     else
       root_path
     end

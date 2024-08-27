@@ -6,14 +6,14 @@ Rails.application.routes.draw do
   }
   resources :planners, controller: 'planners/planners', only: %i[index show]
   get "search/planners" => "planners/planners#search", as: :planners_search
-  get "planners/home" => "plannners/planners#home", as: :planners_home
+  get "home/planners" => "planners/planners#home", as: :planners_home
 
   devise_for :clients, controllers: {
     sessions:      'clients/sessions',
     passwords:     'clients/passwords',
     registrations: 'clients/registrations'
   }
-  get "clients/home" => "clients/clients#home", as: :clients_home
+  get "home/clients" => "clients/clients#home", as: :clients_home
   
 
   resources :meetings, controller: 'meetings/meetings', only: %i[index new create edit update destroy]

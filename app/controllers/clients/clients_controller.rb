@@ -2,7 +2,7 @@
 
 module Clients
   class ClientsController < ApplicationController
-    before_action :authenticate_client!
+    before_action :authenticate_user!
 
     def home
       @groped_day = fetch_empty_slots
@@ -25,6 +25,17 @@ module Clients
     def find_next_meeting
       Meeting.order(start_time: :asc).find do |meeting|
         meeting.client_id == current_client.id && meeting.start_time > Time.zone.now
+      end
+    end
+
+    def authenticate_user!
+      if current_client.nil? && current_planner.nil?
+        flash[:alert] = 'ログインもしくはアカウント登録してください。' 
+        redirect_to root_path
+      elsif current_client
+        authenticate_client!
+      elsif current_planner
+        authenticate_planner!
       end
     end
   end
