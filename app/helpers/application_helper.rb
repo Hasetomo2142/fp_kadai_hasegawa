@@ -16,6 +16,7 @@ module ApplicationHelper
   def convert_empty_slot_to_symbol(empty_slot)
     return '○' if empty_slot >= 5
     return '△' if empty_slot >= 1
+
     '×'
   end
 
