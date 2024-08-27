@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Clients
-  class HomeController < ApplicationController
+  class ClientsController < ApplicationController
     before_action :authenticate_client!
 
     def home

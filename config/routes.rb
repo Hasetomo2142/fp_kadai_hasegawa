@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     passwords:     'clients/passwords',
     registrations: 'clients/registrations'
   }
-  get "clients/home" => "clients/home#home", as: :clients_home
+  get "clients/home" => "clients/clients#home", as: :clients_home
 
   resources :meetings, controller: 'meetings/meetings', only: %i[index new create edit update destroy]
   get "search/meetings" => "meetings/meetings#search", as: :meetings_search
