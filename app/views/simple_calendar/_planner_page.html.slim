@@ -1,10 +1,10 @@
--if @role == 'client'
-  -if meeting = @empty_slots.find_by(start_time: start_time)
+- if @role == 'client'
+  - if meeting = @empty_slots.find { |slot| slot.start_time == start_time }
     = button_to "予約", meeting_path(meeting), method: :put, class: "btn btn-primary"
 -elsif @role == 'planner'
-  - if reservation = @reservations.find_by(start_time: start_time)
+  - if reservation = @reservations.find { |r| r.start_time == start_time }
       h5 = reservation.client.name
-  - elsif slot = @empty_slots.find_by(start_time: start_time)
+  - elsif slot = @empty_slots.find { |slot| slot.start_time == start_time }
     = button_to "cancel", meeting_path(slot), method: :delete, class: "btn btn-danger btn-sm"
   - else
     = link_to "-", new_meeting_path(start_time: start_time, end_time: start_time.since(30.minutes)), style: "text-decoration: none;"
