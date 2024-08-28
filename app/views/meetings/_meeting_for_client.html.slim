@@ -9,5 +9,5 @@
             = meeting.planner.name
             | &nbsp;&nbsp;&nbsp
             = "#{meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{meeting.end_time.strftime('%H:%M')}の枠"
-          p = meeting.planner.description
+          p = meeting.planner.description.truncate(70)
       = yield
