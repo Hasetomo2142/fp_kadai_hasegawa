@@ -12,7 +12,7 @@ RSpec.describe Planner do
 
     it { is_expected.to validate_length_of(:name).is_at_most(50) }
     it { is_expected.to validate_length_of(:password).is_at_least(6) }
-    it { is_expected.to validate_length_of(:description).is_at_most(1000) }
+    it { is_expected.to validate_length_of(:description).is_at_most(1500) }
 
     describe 'validate_uniqueness' do
       before { create(:planner) }
