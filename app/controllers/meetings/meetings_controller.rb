@@ -37,7 +37,6 @@ module Meetings
         else
           Meeting.page(params[:page]).per(5)
         end
-      @is_reservation_page = false
       render 'meetings/search'
     end
 
