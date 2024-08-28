@@ -22,7 +22,7 @@
         - ['00', '30'].each do |minute|
           tr
             - # 左端の時間列に時間範囲を表示
-            td
+            td.p-3
               = "#{hour.to_s.rjust(2, '0')}:#{minute.to_s.rjust(2, '0')}〜#{(minute.to_i == 0 ? hour : hour + 1).to_s.rjust(2, '0')}:#{minute.to_i == 0 ? '30' : '00'}"
             - date_range.slice(0, 6).each_with_index do |day, index|
               = content_tag :td, class: "text-center align-middle #{'bg-info bg-opacity-50' if day == Date.today}" do
