@@ -18,9 +18,28 @@ class Planner < ApplicationRecord
     Meeting.where(client_id: nil, planner_id: id, start_time: Time.zone.now..3.months.since)
   end
 
+  def find_next_meeting
+    Meeting.order(start_time: :asc).find do |meeting|
+      meeting.planner_id == id && meeting.start_time > Time.zone.now && !meeting.client_id.nil?
+    end
+  end
+
   class << self
     def search_planners_by_empty_slot(date)
       Planner.includes(:meetings).where(meetings: { client_id: nil, start_time: date })
+    end
+
+    def search_planners_by_name(name)
+      Planner.where('name LIKE ?', "%#{name}%")
+    end
+
+    def search_planners_by_keyword(keyword)
+      Planner.where('name LIKE ? OR description LIKE ?', "%#{keyword}%", "%#{keyword}%")
+    end
+
+    def search_planner_by_name_and_keyword(name, keyword)
+      Planner.where('name LIKE ? AND (name LIKE ? OR description LIKE ?)',
+                    "%#{name}%", "%#{keyword}%", "%#{keyword}%")
     end
 
     def convert_to_datetime(date, time)

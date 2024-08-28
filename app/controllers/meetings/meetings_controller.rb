@@ -3,7 +3,6 @@
 module Meetings
   class MeetingsController < ApplicationController
     before_action :authenticate_user!
-    
 
     def index
       if current_client

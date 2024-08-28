@@ -7,4 +7,7 @@
   - elsif slot = @empty_slots.find { |slot| slot.start_time == start_time }
     = button_to "cancel", meeting_path(slot), method: :delete, class: "btn btn-danger btn-sm"
   - else
-    = link_to "-", new_meeting_path(start_time: start_time, end_time: start_time.since(30.minutes)), style: "text-decoration: none;"
+    - if start_time > Time.now
+      = link_to "+", new_meeting_path(start_time: start_time, end_time: start_time.since(30.minutes)), style: "text-decoration: none;"
+    - else
+      | -
