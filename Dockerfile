@@ -1,5 +1,7 @@
 FROM ruby:3.2.3
 
+ENV RAILS_ENV="production"
+
 # コンテナの作業ディレクトリ
 WORKDIR /app
 
