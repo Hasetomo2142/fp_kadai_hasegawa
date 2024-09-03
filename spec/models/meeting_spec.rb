@@ -16,20 +16,20 @@ RSpec.describe Meeting do
     end
 
     it 'is invaild that duplicate slot for plannner' do
-      start_time = Time.new(2024, 1, 1, 10, 0, 0) # Replace with your desired start time
-      end_time = Time.new(2024, 1, 1, 10, 30, 0) # Replace with your desired end time
-      tmp_slot = create(:empty_slot, start_time: start_time, end_time: end_time)
-      empty_slot = build(:empty_slot, start_time: start_time, end_time: end_time, planner_id: tmp_slot.planner_id)
+      start_time = Time.zone.local(2024, 1, 1, 10, 0, 0) # Replace with your desired start time
+      end_time = Time.zone.local(2024, 1, 1, 10, 30, 0) # Replace with your desired end time
+      tmp_slot = create(:empty_slot, start_time:, end_time:)
+      empty_slot = build(:empty_slot, start_time:, end_time:, planner_id: tmp_slot.planner_id)
       empty_slot.valid?
       expect(empty_slot.errors[:start_time]).to include('は既に予定されています')
     end
 
     it 'is invalid when trying to overwrite an existing client' do
-      client_1 = create(:client)
-      client_2 = create(:client)
+      client1 = create(:client)
+      client2 = create(:client)
 
-      reservation = create(:reservation, client_id: client_1.id)
-      reservation.update(client_id: client_2.id)
+      reservation = create(:reservation, client_id: client1.id)
+      reservation.update(client_id: client2.id)
       expect(reservation.errors[:start_time]).to include('この枠は既に埋まっています')
     end
   end
