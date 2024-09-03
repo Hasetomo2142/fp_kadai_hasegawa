@@ -15,19 +15,19 @@ services:
     tty: true
     # 標準入出力とエラー出力をコンテナに結びつける設定。
     stdin_open: true
-    depends_on:
-      - db
-  # MySQLの設定
-  db:
-    container_name: sample_db
-    image: mysql:8.0
-    volumes:
-      - db-data:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DB} # 環境変数から参照
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # 環境変数から参照
-      TZ: "Asia/Tokyo"
-    ports:
-      - "${MYSQL_POOT}:3306" # 環境変数から参照
-volumes:
-  db-data:
+#     depends_on:
+#       - db
+#   # MySQLの設定
+#   db:
+#     container_name: sample_db
+#     image: mysql:8.0
+#     volumes:
+#       - db-data:/var/lib/mysql
+#     environment:
+#       MYSQL_DATABASE: ${MYSQL_DB} # 環境変数から参照
+#       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # 環境変数から参照
+#       TZ: "Asia/Tokyo"
+#     ports:
+#       - "${MYSQL_POOT}:3306" # 環境変数から参照
+# volumes:
+#   db-data:
