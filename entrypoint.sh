@@ -4,11 +4,9 @@ set -e
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /myapp/tmp/pids/server.pid
 
-# production環境の場合のみ
 if [ "$RAILS_ENV" = "production" ]; then
   bundle exec rails assets:precompile
-  bundle exec rails db:create
-  bundle exec rails db:migrate
+  # マイグレーション処理
   bundle exec ridgepole -c config/database.yml -E production --apply -f db/Schemafile
 fi
 
