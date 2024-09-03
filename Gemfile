@@ -29,7 +29,7 @@ group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
   gem 'brakeman', '~> 6.2.1'
   gem 'rubocop-rails-omakase', require: false
-  gem 'rspec-rails', '~> 6.1.0'
+  gem 'rspec-rails', '~> 7.0.0'
   gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
   gem 'rubocop-factory_bot'
