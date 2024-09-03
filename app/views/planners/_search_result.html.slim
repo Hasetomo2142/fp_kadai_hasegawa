@@ -1,0 +1,13 @@
+-if @date.present?
+  .container.bg-lite.p-5
+    .row.mb-4
+      .col-md-12.text-center
+        h3 検索結果 
+        h4 日時: #{I18n.l(Time.zone.parse(@date), format: :long)}〜の枠
+
+-elsif @range.present?
+  .container.bg-lite.p-5
+    .row.mb-4
+      .col-md-12.text-center
+        h3 検索結果
+        h4 日時: #{convert_to_message(@range)}
