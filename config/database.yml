@@ -19,7 +19,7 @@ test:
 # production　プロジェクトに合わせて修正。
 production:
   <<: *default
-  database: database-2
+  database: app_production
   username: root
   password: <%= ENV["APP_DATABASE_PASSWORD"] %>
   host: <%= ENV.fetch("MYSQL_HOST_PRODUCTION") { '' } %> #.env 環境変数を参照
