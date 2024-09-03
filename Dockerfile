@@ -14,8 +14,8 @@ COPY . /app
 
 COPY entrypoint.sh /usr/bin/
 # プロジェクト作成時はコメントアウト（コンテナが立ち上がらないため）
-# RUN chmod +x /usr/bin/entrypoint.sh
-# ENTRYPOINT ["entrypoint.sh"]
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
 
 EXPOSE 3001
 
