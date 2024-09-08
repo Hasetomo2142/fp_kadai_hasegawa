@@ -24,15 +24,26 @@ module Planners
 
     def search
       @planners = Planner.page(params[:page]).per(5)
-      if params[:name].present? && params[:keyword].present?
-        @planners = Planner.search_planner_by_name_and_keyword(params[:name],
-                                                               params[:keyword]).page(params[:page]).per(5)
-      elsif params[:name].present?
-        @planners = Planner.search_planners_by_name(params[:name]).page(params[:page]).per(5)
-      elsif params[:keyword].present?
-        @planners = Planner.search_planners_by_keyword(params[:keyword]).page(params[:page]).per(5)
+
+      if params[:name].present? || params[:keyword].present?
+        @planners = search_planners(params[:name], params[:keyword]).page(params[:page]).per(5)
       end
+
       render 'planners/search'
+    end
+
+    private
+
+    def search_planners(name, keyword)
+      if name.present? && keyword.present?
+        Planner.search_planner_by_name_and_keyword(name, keyword)
+      elsif name.present?
+        Planner.search_planners_by_name(name)
+      elsif keyword.present?
+        Planner.search_planners_by_keyword(keyword)
+      else
+        Planner.all
+      end
     end
   end
 end

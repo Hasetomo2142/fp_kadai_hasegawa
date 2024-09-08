@@ -14,6 +14,10 @@
           br
           = f.email_field :email, autocomplete: "email", class: "form-control"
         .form-group.mb-2
+          = f.label :description
+          br
+          = f.text_area :description, class: "form-control"
+        .form-group.mb-2
           = f.label :password
           - if @minimum_password_length
             em
@@ -26,10 +30,6 @@
           = f.label :password_confirmation
           br
           = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
-        .form-group.mb-2
-          = f.label :description
-          br
-          = f.text_area :description, class: "form-control"
         .form-group.mb-2.mt-3
           = f.submit "Sign up", class: "btn btn-outline-dark w-100"
       = render "devise/shared/links"

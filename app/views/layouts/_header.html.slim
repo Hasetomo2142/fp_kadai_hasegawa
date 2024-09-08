@@ -21,8 +21,21 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
                 = link_to "Clientとしてログイン", new_client_session_path, class: "dropdown-item"
         - else
           - if client_or_planner == "client"
-              li.nav-item 
-                = button_to "Logout", destroy_client_session_path, class: "nav-link", method: :delete 
+            li.nav-item.dropdown
+              a.nav-link.dropdown-toggle href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                | Setting
+              ul.dropdown-menu aria-labelledby="navbarDropdown"
+                li
+                  = button_to "ログアウト", destroy_client_session_path, class: "dropdown-item", method: :delete
+                li
+                  = link_to "プロフィール変更", edit_client_registration_path, class: "dropdown-item"
           - else
-              li.nav-item 
-                = button_to "Logout", destroy_planner_session_path, class: "nav-link", method: :delete
+            li.nav-item.dropdown
+              a.nav-link.dropdown-toggle href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                | Setting
+              ul.dropdown-menu aria-labelledby="navbarDropdown"
+                li
+                  = button_to "ログアウト", destroy_planner_session_path, class: "dropdown-item", method: :delete
+                li
+                  = link_to "プロフィール変更", edit_planner_registration_path, class: "dropdown-item"
+
