@@ -29,31 +29,31 @@ RSpec.describe Planner do
     it 'is invalid without a name' do
       planner = build(:planner, name: nil)
       planner.valid?
-      expect(planner.errors[:name]).to include("can't be blank")
+      expect(planner.errors[:name]).to include('を入力してください')
     end
 
     it 'is invalid without an email' do
       planner = build(:planner, email: nil)
       planner.valid?
-      expect(planner.errors[:email]).to include("can't be blank")
+      expect(planner.errors[:email]).to include('を入力してください')
     end
 
     it 'is invalid without a password' do
       planner = build(:planner, password: nil)
       planner.valid?
-      expect(planner.errors[:password]).to include("can't be blank")
+      expect(planner.errors[:password]).to include('を入力してください')
     end
 
     it 'is invalid without a description' do
       planner = build(:planner, description: nil)
       planner.valid?
-      expect(planner.errors[:description]).to include("can't be blank")
+      expect(planner.errors[:description]).to include('を入力してください')
     end
 
     it 'is invalid wrong email format' do
       planner = build(:planner, email: 'wrongemail')
       planner.valid?
-      expect(planner.errors[:email]).to include('is invalid')
+      expect(planner.errors[:email]).to include('は不正な値です')
     end
   end
 end

@@ -27,19 +27,19 @@ RSpec.describe Client do
     it 'is invalid without a name' do
       client = build(:client, name: nil)
       client.valid?
-      expect(client.errors[:name]).to include("can't be blank")
+      expect(client.errors[:name]).to include('を入力してください')
     end
 
     it 'is invalid without an email' do
       client = build(:client, email: nil)
       client.valid?
-      expect(client.errors[:email]).to include("can't be blank")
+      expect(client.errors[:email]).to include('を入力してください')
     end
 
     it 'is invalid wrong email format' do
       client = build(:client, email: 'wrongemail')
       client.valid?
-      expect(client.errors[:email]).to include('is invalid')
+      expect(client.errors[:email]).to include('は不正な値です')
     end
   end
 end
