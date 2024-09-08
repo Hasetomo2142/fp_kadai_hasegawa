@@ -6,11 +6,11 @@ class Planner < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 50 }, byte_size: true
   validates :email,
             format: { with: Devise.email_regexp },
             uniqueness: { case_sensitive: false }
-  validates :description, presence: true, length: { maximum: 1500 }
+  validates :description, presence: true, length: { maximum: 1500 }, byte_size: true
 
   has_many :meetings, dependent: :destroy
 
