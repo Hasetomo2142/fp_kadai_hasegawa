@@ -40,7 +40,13 @@ module Meetings
     end
 
     def update
-      meeting = Meeting.find(params[:id])
+      meeting = Meeting.find_by(id: params[:id])
+      if meeting.nil?
+        flash[:alert] = 'すでにキャンセルされた枠です'
+        redirect_to clients_home_path
+        return
+      end
+
       begin
         meeting.update!(client_id: current_client.id)
       rescue StandardError
@@ -48,6 +54,7 @@ module Meetings
         redirect_to clients_home_path
         return
       end
+
       flash[:notice] =
         "予約が完了しました　　#{meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{meeting.end_time.strftime('%H:%M')}の枠"
       redirect_to clients_home_path
@@ -78,7 +85,11 @@ module Meetings
         meeting.destroy
         flash[:notice] = '空き枠を削除しました'
       else
-        flash[:alert] = '権限がありません'
+        flash[:alert] = if meeting.client_id.nil?
+                          '権限がありません'
+                        else
+                          "この枠は既に予約されています。#{meeting.client.name}さんにキャンセルを依頼してください。"
+                        end
       end
       redirect_to planners_home_path
     end
