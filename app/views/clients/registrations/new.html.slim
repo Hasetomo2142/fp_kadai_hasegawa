@@ -7,11 +7,9 @@
         = render "devise/shared/error_messages", resource: resource
         .form-group.mb-2
           = f.label :name
-          br
           = f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control"
         .form-group.mb-2
           = f.label :email
-          br
           = f.email_field :email, autocomplete: "email", class: "form-control"
         .form-group.mb-2
           = f.label :password
@@ -20,11 +18,9 @@
               | (
               = @minimum_password_length
               |  characters minimum)
-          br
           = f.password_field :password, autocomplete: "new-password", class: "form-control"
         .form-group.mb-2
           = f.label :password_confirmation
-          br
           = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
         .form-group.mb-2.mt-3
           = f.submit "Sign up", class: "btn btn-outline-dark w-100"
