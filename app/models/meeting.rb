@@ -10,6 +10,7 @@ class Meeting < ApplicationRecord
   validates :end_time, presence: true
   validate :end_time_after_start_time
   validate :prevent_duplicate_slot_for_planner, on: :create
+  validate :prevent_duplicate_slot_for_client, on: :update
   validate :prevent_overwrite_existing_client, on: :update
 
   class << self
@@ -56,11 +57,18 @@ class Meeting < ApplicationRecord
     errors.add(:start_time, 'は既に予定されています')
   end
 
+  def prevent_duplicate_slot_for_client
+    return if start_time.blank? || end_time.blank?
+
+    return unless Meeting.exists?(client_id:, start_time:)
+
+    errors.add(:start_time, '同じ時間の予約があります')
+  end
+
   def prevent_overwrite_existing_client
-    return if client_id.blank?
+    return if client_id_was.nil? # 古いclient_idがnilならスキップ（初回登録など）
+    return unless will_save_change_to_client_id? # client_idが変更されないならスキップ
 
-    return unless will_save_change_to_client_id?
-
-    errors.add(:start_time, 'この枠は既に埋まっています')
+    errors.add(:start_time, 'この枠は既に埋まっています') if client_id.present?
   end
 end

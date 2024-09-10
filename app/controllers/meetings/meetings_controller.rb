@@ -17,11 +17,15 @@ module Meetings
         else
           Meeting.page(params[:page]).per(5)
         end
+      @is_reservation_page = false
       render 'meetings/search'
     end
 
     def index
-      @meetings = Meeting.all
+      @meetings = Meeting.where(client_id: current_client.id,
+                                start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
+      @is_reservation_page = true
+      render 'meetings/index'
     end
 
     def edit
@@ -29,10 +33,31 @@ module Meetings
     end
 
     def update
-      @meeting = Meeting.find(params[:id])
-      @meeting.update(client_id: current_client.id)
-      flash[:notice] = '予約が完了しました'
+      meeting = Meeting.find(params[:id])
+      begin
+        meeting.update!(client_id: current_client.id)
+      rescue StandardError
+        flash[:alert] = "予約に失敗しました：#{meeting.errors[:start_time].first}"
+        redirect_to clients_home_path
+        return
+      end
+      flash[:notice] =
+        "予約が完了しました　　#{meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{meeting.end_time.strftime('%H:%M')}の枠"
       redirect_to clients_home_path
+    end
+
+    def cancel
+      meeting = Meeting.find(params[:id])
+      if meeting.client_id == current_client.id
+        # rubocop:disable Rails/SkipsModelValidations
+        meeting.update_columns(client_id: nil)
+        # rubocop:enable Rails/SkipsModelValidations
+        flash[:notice] = '予約をキャンセルしました'
+        redirect_to meetings_path
+      else
+        flash[:alert] = '他のユーザーの予約はキャンセルできません'
+        redirect_to clients_home_path
+      end
     end
 
     private

@@ -3,13 +3,12 @@
   / Row for the date search section
   .row.mb-4
     .col-md-12.text-center
-      h2.font-weight-bold.text-primary プランナーから探す
-
-  = render partial: 'planners/search_result'
+      h2.font-weight-bold.text-primary 予約一覧
 
   ul.users
-    = render partial: 'planners/planner', collection: @planners
+    = render partial: 'meetings/meeting_cancel', collection: @meetings, as: :meeting
   .container.text-center
     .pagination.justify-content-center
-      = paginate @planners, theme: 'bootstrap-5'
+      = paginate @meetings, theme: 'bootstrap-5'
     = debug(params)
+

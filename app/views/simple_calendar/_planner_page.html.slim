@@ -1,0 +1,5 @@
+-if @role == 'client'
+  -if meeting = @empty_slots.find_by(start_time: start_time)
+    = button_to "予約", meeting_path(meeting), method: :put, class: "btn btn-primary"
+-elsif @role == 'planner'
+  = link_to "ボタン", planner_path(@planner), style: "font-size: 24px; font-weight: bold; text-decoration: none;"

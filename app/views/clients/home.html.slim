@@ -4,9 +4,18 @@
       h2 次回のミーティング
       .card
         .card-body
-          p 8/14 18:30〜19:00
-          p 田中 太郎
-      a href="#" class="btn btn-link" 全ての予定を確認
+        - if @next_meeting
+          h3.mb-4
+            = "#{@next_meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{@next_meeting.end_time.strftime('%H:%M')}の枠"
+          h3.mb-4 
+            = link_to @next_meeting.planner.name, planner_path(@next_meeting.planner)
+        - else
+          h3.mb-4 予定はありません
+
+    - if @next_meeting
+      a href= meetings_path class="btn btn-link" 全ての予定を確認
+    - else
+      .container.mb-5
 
   .row.justify-content-center
     .col-md-5.d-flex.mx-md-5
@@ -34,15 +43,17 @@
       .card.w-100
         .card-header.text-center
           h3 プランナーから探す
-        .div.pt-3
         .card-body
-          = form_tag '#', method: :get do
+          = form_tag planners_search_path, method: :get do
             .form-group
               label 名前
-              = text_field_tag :name, '田中太郎', class: 'form-control'
-            .div.pt-5
-            .text-center.mt.3
+              = text_field_tag :name, nil, placeholder: '名前を入力', class: 'form-control'
+            .form-group.mt-3
+              label キーワード
+              = text_field_tag :keyword, nil, placeholder: 'キーワードを入力', class: 'form-control'
+            .text-center.mt-3
               = submit_tag '検索', class: 'btn btn-primary'
+
     
     .container.mt-5.mb-5
       = week_calendar(number_of_weeks: 1) do |date| 

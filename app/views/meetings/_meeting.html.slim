@@ -10,5 +10,4 @@
             | &nbsp;&nbsp;&nbsp
             = "#{meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{meeting.end_time.strftime('%H:%M')}の枠"
           p = meeting.planner.description
-      .col-md-2.d-flex.align-items-center.justify-content-center
-        = button_to "予約", meeting_path(meeting), method: :put, class: "btn btn-primary"
+      = yield

@@ -1,8 +1,17 @@
 # frozen_string_literal: true
 
 module Planners
-  class SearchController < ApplicationController
+  class PlannersController < ApplicationController
     before_action :authenticate_client!
+
+    def show
+      @planner = Planner.find(params[:id])
+      @is_planner_page = true
+      @role = 'client' if current_client
+      @role = 'planner' if current_planner
+      @empty_slots = @planner.fetch_empty_slots
+      render 'planners/show'
+    end
 
     def search
       @planners = Planner.all
