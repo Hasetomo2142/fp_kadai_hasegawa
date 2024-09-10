@@ -5,7 +5,7 @@ module Clients
     before_action :authenticate_client!
 
     def home
-      @groped_day = fetch_empty_slots
+      @grouped_day = fetch_empty_slots
       @meetings = fetch_current_meetings
       @next_meeting = find_next_meeting
       @is_client_page = true

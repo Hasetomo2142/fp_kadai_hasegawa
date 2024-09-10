@@ -1,8 +1,9 @@
 .container.bg-lite.p-5
   .row.mb-4
     .col-md-12.text-center
-      h2 次回のミーティング
       .card
+        h2.card-header.text-center
+          |次回のミーティング
         .card-body
         - if @next_meeting
           h3.mb-4
@@ -11,14 +12,14 @@
             = link_to @next_meeting.planner.name, planner_path(@next_meeting.planner)
         - else
           h3.mb-4 予定はありません
+        - if @next_meeting
+          .text-center.mt-2.mb-4
+            a href= meetings_path class="btn btn-outline-dark w-50" 全ての予定を確認
+        - else
+          .container.mb-5
 
-    - if @next_meeting
-      a href= meetings_path class="btn btn-link" 全ての予定を確認
-    - else
-      .container.mb-5
-
-  .row.justify-content-center
-    .col-md-5.d-flex.mx-md-5
+  .row.justify-content-center.mt-5
+    .col-md-6.d-flex.mx-md-6
       .card.w-100
         .card-header.text-center
           h3 日程から探す
@@ -37,9 +38,9 @@
                   label 終了時間
                   = time_field_tag 'range[end_time]', '18:00', class: 'form-control', required: true, min: '10:00', max: '18:00'
             .text-center.mt-3
-              = submit_tag '検索', class: 'btn btn-primary', name: nil
+              = submit_tag '検索', class: 'btn btn-outline-dark w-100 mt-3', name: nil
             
-    .col-md-5.d-flex.mx-md-5
+    .col-md-6.d-flex.mx-md-6
       .card.w-100
         .card-header.text-center
           h3 プランナーから探す
@@ -52,8 +53,7 @@
               label キーワード
               = text_field_tag :keyword, nil, placeholder: 'キーワードを入力', class: 'form-control'
             .text-center.mt-3
-              = submit_tag '検索', class: 'btn btn-primary'
-
+              = submit_tag '検索', class: 'btn btn-outline-dark w-100'
     
     .container.mt-5.mb-5
       = week_calendar(number_of_weeks: 1) do |date| 

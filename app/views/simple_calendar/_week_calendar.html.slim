@@ -3,7 +3,7 @@
 .simple-calendar
   .calendar-heading.text-center.mb-3
     .d-flex.justify-content-center
-      nav.d-flex.justify-content-between[style="max-width: 400px; width: 100%;"]
+      nav.mt-5.d-flex.justify-content-between[style="max-width: 400px; width: 100%;"]
         = link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view, class: 'btn btn-secondary mx-1 w-100'
         = link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: 'btn btn-primary mx-5 w-100'
         = link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: 'btn btn-secondary mx-1 w-100'
@@ -42,9 +42,3 @@
                     - render 'simple_calendar/client_page', start_time: start_time
                   - elsif @is_planner_page # plannerの表示
                     - render 'simple_calendar/planner_page', start_time: start_time
-
-  .text-center.mt-3
-    = link_to t('simple_calendar.next', default: 'Next Week'), calendar.url_for_next_view, class: 'btn btn-primary'
-
-= debug(params)
-

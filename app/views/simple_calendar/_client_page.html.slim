@@ -1,5 +1,5 @@
 -if start_time > Time.zone.now
-  - count = @groped_day[start_time]&.count || 0
+  - count = @grouped_day[start_time]&.count || 0
   -if count > 0
     = link_to "#{convert_empty_slot_to_symbol(count)}", meetings_search_path(date: start_time), style: "font-size: 24px; font-weight: bold; text-decoration: none;"
   -else

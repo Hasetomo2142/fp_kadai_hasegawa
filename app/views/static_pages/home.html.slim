@@ -1,9 +1,14 @@
 .container
   .row
-    .col-md-12.text-center
-      h1.display-4.text-primary.mt-5
-        | Welcome to StaticPages#home
-      p.lead.text-secondary.mt-3
-        | Find me in app/views/static_pages/home.html.erb
-      a.btn.btn-primary.btn-lg.mt-4 href="#" role="button"
-        | Learn more
+    .col-md-12.text-center.bg-white.rounded-4.shadow-lg.p-5.mt-5
+      h1.text-center.mb-5 新規登録
+
+      .d-flex.justify-content-around.mt-4
+        .text-center
+          h3 クライアントとして
+          = link_to "相談をする", new_client_registration_path, class: "btn btn-outline-dark mt-2"
+
+        .text-center
+          h3 プランナーとして
+          = link_to "相談を受ける", new_planner_registration_path, class: "btn btn-outline-dark mt-2"
+
