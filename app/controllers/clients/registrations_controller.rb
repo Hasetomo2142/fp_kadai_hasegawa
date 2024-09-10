@@ -57,7 +57,7 @@ module Clients
     end
 
     def after_update_path_for(_resource)
-      clients_home_path
+      edit_client_registration_path
     end
 
     protected

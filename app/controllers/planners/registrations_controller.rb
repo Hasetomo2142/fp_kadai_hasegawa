@@ -57,7 +57,7 @@ module Planners
     end
 
     def after_update_path_for(_resource)
-      root_path
+      edit_planner_registration_path
     end
 
     protected
