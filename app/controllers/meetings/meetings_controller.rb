@@ -22,7 +22,8 @@ module Meetings
     end
 
     def index
-      @meetings = Meeting.where(client_id: current_client.id, start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
+      @meetings = Meeting.where(client_id: current_client.id,
+                                start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
       @is_reservation_page = true
       render 'meetings/index'
     end
