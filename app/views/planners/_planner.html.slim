@@ -5,7 +5,7 @@
             = image_tag "icon.png", class: "img-fluid", alt: "Planner image"
           .col-md-8
             .card-body
-              h5 = planner.name
-              p = planner.description
+              h5 = link_to planner.name, planner_path(planner), class: 'no-link-style'
+              p = planner.description.truncate(70)
           .col-md-2.d-flex.align-items-center.justify-content-center
             a.btn.btn-primary href=planner_path(planner) 詳細を見る

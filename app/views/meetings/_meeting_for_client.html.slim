@@ -6,8 +6,9 @@
       .col-md-8
         .card-body
           h5
-            = meeting.planner.name
+            = link_to meeting.planner.name, planner_path(meeting.planner), class: 'no-link-style'
             | &nbsp;&nbsp;&nbsp
             = "#{meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{meeting.end_time.strftime('%H:%M')}の枠"
-          p = meeting.planner.description
+          p = meeting.planner.description.truncate(70)
+          
       = yield

@@ -24,6 +24,8 @@ gem 'bootstrap5-kaminari-views'
 gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'faker'
+gem "hashid-rails", "~> 1.0"
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
@@ -35,7 +37,6 @@ group :development, :test do
   gem 'rubocop-factory_bot'
   gem 'rubocop-rspec_rails'
   gem 'slim_lint'
-  gem 'faker'
   gem "shoulda-matchers"
 end
 

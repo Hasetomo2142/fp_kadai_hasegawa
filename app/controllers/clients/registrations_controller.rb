@@ -56,6 +56,20 @@ module Clients
       clients_home_path
     end
 
+    def after_update_path_for(_resource)
+      edit_client_registration_path
+    end
+
+    protected
+
+    def update_resource(resource, params)
+      if params[:password].present? || params[:password_confirmation].present? || params[:current_password].present?
+        resource.update_with_password(params)
+      else
+        resource.update_without_password(params.except(:current_password))
+      end
+    end
+
     # The path used after sign up for inactive accounts.
     # def after_inactive_sign_up_path_for(resource)
     #   super(resource)

@@ -1,5 +1,7 @@
 FROM ruby:3.2.3
 
+ENV RAILS_ENV="production"
+
 # コンテナの作業ディレクトリ
 WORKDIR /app
 
@@ -8,6 +10,7 @@ COPY Gemfile Gemfile.lock /app/
 
 # 依存関係をインストール
 RUN bundle install
+COPY . /app
 
 COPY entrypoint.sh /usr/bin/
 # プロジェクト作成時はコメントアウト（コンテナが立ち上がらないため）

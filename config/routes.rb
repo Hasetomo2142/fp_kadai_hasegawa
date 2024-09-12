@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     passwords:     'planners/passwords',
     registrations: 'planners/registrations'
   }
-  resources :planners, controller: 'planners/planners', only: %i[index show]
+  resources :planners, controller: 'planners/planners', only: %i[index show edit]
   get "search/planners" => "planners/planners#search", as: :planners_search
   get "home/planners" => "planners/planners#home", as: :planners_home
 

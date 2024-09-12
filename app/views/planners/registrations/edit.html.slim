@@ -1,41 +1,34 @@
 .container.mt-5
   .row
-    .col-md-6.offset-md-3
-      h2
-        | Edit 
-        = resource_name.to_s.humanize
-      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "needs-validation", novalidate: true }) do |f|
+    .col-md-6.offset-md-3.bg-white.rounded-4.shadow-lg.p-5
+      h2.text-center
+        | プロフィール変更
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation", novalidate: true }) do |f|
         = render "devise/shared/error_messages", resource: resource
-        .form-group
-          = f.label :email, class: "form-label"
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          div
-            | Currently waiting confirmation for: 
-            = resource.unconfirmed_email
-        .form-group
-          = f.label :password, class: "form-label"
-          i
-            | (leave blank if you don't want to change it)
+        .form-group.mb-2
+          = f.label :name
+          = f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control"
+        .form-group.mb-2
+          = f.label :email
+          = f.email_field :email, autocomplete: "email", class: "form-control"
+        .form-group.mb-2
+          = f.label :description
+          = f.text_area :description, class: "form-control"
+        .form-group.mb-2
+          = f.label :password
+          - if @minimum_password_length
+            em
+              | (
+              = @minimum_password_length
+              |  characters minimum)
           = f.password_field :password, autocomplete: "new-password", class: "form-control"
-        - if @minimum_password_length
-          br
-          em
-            = @minimum_password_length
-            |  characters minimum
-        .form-group
-          = f.label :password_confirmation, class: "form-label"
+        .form-group.mb-2
+          = f.label :password_confirmation
           = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
-        .form-group
-          = f.label :current_password, class: "form-label"
-          i
-            | (we need your current password to confirm your changes)
+        .form-group.mb-2
+          = f.label :current_password
           = f.password_field :current_password, autocomplete: "current-password", class: "form-control"
-        .form-group
-          = f.submit "Update", class: "btn btn-primary"
-      h3
-        | Cancel my account
-      div
-        | Unhappy? 
-        = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger"
-      = link_to "Back", :back
+        .form-group.mb-2.mt-3
+          = f.submit "change", class: "btn btn-outline-dark w-100"
+        .text-center.mt-4
+          a href= get_home_path class="btn btn-dark w-100" ホームに戻る

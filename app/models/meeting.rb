@@ -20,6 +20,10 @@ class Meeting < ApplicationRecord
       @fetch_previous_and_next_three_month = Meeting.where(client_id: nil, start_time: previous_month..next_month)
     end
 
+    def fetch_reservation_for_planner(planner_id)
+      Meeting.where(planner_id:).where.not(client_id: nil)
+    end
+
     def count_empty_slots_in_frames
       @current_meetings = fetch_previous_and_next_three_month(Time.zone.now)
       @grouped_meetings = @current_meetings.group_by(&:start_time)

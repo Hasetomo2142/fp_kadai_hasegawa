@@ -5,19 +5,21 @@ default: &default
   database: <%= ENV.fetch("MYSQL_DB") { '' } %> #.env 環境変数を参照
   username: <%= ENV.fetch("MYSQL_USER") { '' } %> #.env 環境変数を参照
   password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD") { '' } %> #.env 環境変数を参照
-  host: db #docker-compose.ymlのDBのサービス名を指定
 
 development:
   <<: *default
   database: <%= ENV.fetch("MYSQL_DB") { '' } %>_development #.env 環境変数を参照
+  host: db #docker-compose.ymlのDBのサービス名を指定
 
 test:
   <<: *default
   database: <%= ENV.fetch("MYSQL_DB") { '_test' } %>_test #.env 環境変数を参照
+  host: db #docker-compose.ymlのDBのサービス名を指定
 
 # production　プロジェクトに合わせて修正。
 production:
   <<: *default
   database: app_production
-  username: app
+  username: root
   password: <%= ENV["APP_DATABASE_PASSWORD"] %>
+  host: <%= ENV.fetch("MYSQL_HOST_PRODUCTION") { '' } %> #.env 環境変数を参照

@@ -4,10 +4,16 @@ class Client < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :rememberable, :validatable
 
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 50 }, byte_size: true
   validates :email,
             format: { with: Devise.email_regexp },
             uniqueness: { case_sensitive: false }
+
+  def find_next_meeting
+    Meeting.order(start_time: :asc).find do |meeting|
+      meeting.client_id == id && meeting.start_time > Time.zone.now
+    end
+  end
 end

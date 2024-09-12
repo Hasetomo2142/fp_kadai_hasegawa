@@ -1,2 +1,13 @@
 @import "bootstrap";
 @import "simple_calendar";
+
+.no-link-style {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease, background-color 0.3s ease;  /* スムーズな変化を追加 */
+}
+
+.no-link-style:hover {
+  color: #007bff;  /* ホバー時にリンクの色を青色に変更 */
+  text-decoration: none;  /* 下線を付けない */
+}

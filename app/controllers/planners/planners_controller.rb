@@ -2,60 +2,47 @@
 
 module Planners
   class PlannersController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_client!, only: %i[show search]
+    before_action :authenticate_planner!, only: %i[home]
 
     def home
-      redirect_to root_path unless current_planner
-      @next_meeting = find_next_meeting
+      @next_meeting = current_planner.find_next_meeting
       @is_planner_page = true
       @role = 'planner'
-      @reservations = Meeting.where(planner_id: current_planner.id).where.not(client_id: nil)
-      @empty_slots = Meeting.where(planner_id: current_planner.id, client_id: nil)
+      @reservations = Meeting.fetch_reservation_for_planner(current_planner.id)
+      @empty_slots = current_planner.fetch_empty_slots
       render 'planners/home'
     end
 
     def show
       @planner = Planner.find(params[:id])
       @is_planner_page = true
-      @role = 'client' if current_client
-      @role = 'planner' if current_planner
+      @role = 'client'
       @empty_slots = @planner.fetch_empty_slots
       render 'planners/show'
     end
 
     def search
-      @planners = Planner.all
+      @planners = Planner.page(params[:page]).per(5)
 
-      if params[:name].present? && params[:keyword].present?
-        @planners = @planners.where('name LIKE ? AND (name LIKE ? OR description LIKE ?)',
-                                    "%#{params[:name]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-      elsif params[:name].present?
-        @planners = @planners.where('name LIKE ?', "%#{params[:name]}%")
-      elsif params[:keyword].present?
-        @planners = @planners.where('name LIKE ? OR description LIKE ?', "%#{params[:keyword]}%",
-                                    "%#{params[:keyword]}%")
+      if params[:name].present? || params[:keyword].present?
+        @planners = search_planners(params[:name], params[:keyword]).page(params[:page]).per(5)
       end
 
-      @planners = @planners.page(params[:page]).per(5)
       render 'planners/search'
     end
 
     private
 
-    def find_next_meeting
-      Meeting.order(start_time: :asc).find do |meeting|
-        meeting.planner_id == current_planner.id && meeting.start_time > Time.zone.now && !meeting.client_id.nil?
-      end
-    end
-
-    def authenticate_user!
-      if current_client.nil? && current_planner.nil?
-        flash[:alert] = 'ログインもしくはアカウント登録してください。'
-        redirect_to root_path
-      elsif current_client
-        authenticate_client!
-      elsif current_planner
-        authenticate_planner!
+    def search_planners(name, keyword)
+      if name.present? && keyword.present?
+        Planner.search_planner_by_name_and_keyword(name, keyword)
+      elsif name.present?
+        Planner.search_planners_by_name(name)
+      elsif keyword.present?
+        Planner.search_planners_by_keyword(keyword)
+      else
+        Planner.all
       end
     end
   end

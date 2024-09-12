@@ -1,10 +1,29 @@
+require 'json'
+
+# JSONファイルからデータをインデックスに基づいて取得
+def get_text_by_index(index)
+  file_path = Rails.root.join('db', 'text.json')  # 相対パスに変更
+  
+  # JSONファイルをロード
+  data = JSON.parse(File.read(file_path))
+
+  # 指定されたインデックスに基づいてデータを取得
+  if data.key?(index.to_s)
+    return data[index.to_s]
+  else
+    return "指定されたインデックス #{index} は存在しません。"
+  end
+end
+
 # ユニークなPlannerの作成と、重複したミーティングの開始時刻を避ける処理
 50.times do |i|
-  # インデックス `i` を使って、ユニークなメールアドレスを作成
+  # インデックス `i % インデックス数` を使ってユニークなテキストを取得
+  text = get_text_by_index(i)  # 10種類のインデックスをループで使用
+
   planner = Planner.create_or_find_by!(
-    name: "Planner#{i}",
-    email: "planner#{i}@seed.com",
-    description: "Planner#{i}です",
+    name: Faker::Name.name,
+    email: "planner#{i}@example.com",
+    description: text,
     password: 'password',
     password_confirmation: 'password'
   )

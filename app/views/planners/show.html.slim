@@ -2,16 +2,16 @@
   .row.mb-4
     .col-md-12
       .card
-        .row.g-0.align-items-center
-          .col-md-2
-            = image_tag "icon.png", class: "img-fluid", alt: "Planner image"
+        .row.g-0.align-items-start
+          .col-md-2.d-flex.flex-column.align-items-center
+            = image_tag "icon.png", class: "img-fluid mb-3", alt: "Planner image", size: "200x200"
+            = link_to 'Contact', "mailto:#{@planner.email}", class: "btn btn-outline-dark mb-4"
           .col-md-8
             .card-body
-              h5 
+              h1 
                 = @planner.name
                 | &nbsp;&nbsp;&nbsp
-                = 'email:' + @planner.email
-              p = @planner.description
+              p = simple_format(@planner.description)
 
     .container.mt-5.mb-5
       = week_calendar(number_of_weeks: 1) do |date| 
