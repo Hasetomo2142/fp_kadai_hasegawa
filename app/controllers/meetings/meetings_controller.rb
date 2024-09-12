@@ -7,7 +7,8 @@ module Meetings
     def index
       # @meetings = Meeting.all
       if current_client
-        @meetings = Meeting.where(client_id: current_client.id, start_time: ...Time.zone.now).order(:start_time).page(params[:page]).per(5)
+        @meetings = Meeting.where(client_id: current_client.id,
+                                  start_time: ...Time.zone.now).order(:start_time).page(params[:page]).per(5)
         @is_reservation_page = true
         render 'meetings/index_for_client'
       elsif current_planner
@@ -39,22 +40,6 @@ module Meetings
         end
       @is_reservation_page = false
       render 'meetings/search'
-    end
-
-    def index
-      # @meetings = Meeting.all
-      if current_client
-        @meetings = Meeting.where(client_id: current_client.id,
-                                start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
-        @is_reservation_page = true
-        render 'meetings/index_for_client'
-      elsif current_planner
-        @meetings = Meeting.where(planner_id: current_planner.id,
-                                start_time: Time.zone.now...).order(:start_time).page(params[:page]).per(5)
-        @reservation = @meetings.where.not(client_id: nil)
-        @slot = @meetings.where(client_id: nil, start_time: Time.zone.now..Time.zone.now.since(3.months))
-        render 'meetings/index_for_planner'
-      end
     end
 
     def update
@@ -101,37 +86,10 @@ module Meetings
       redirect_to planners_home_path
     end
 
-    def destroy
-      if current_planner.nil?
-        flash[:alert] = 'プランナー権限がありません'
-        redirect_to root_path
-        return
-      end
-      meeting = Meeting.find(params[:id])
-      if meeting.planner_id == current_planner.id && meeting.client_id.nil?
-        meeting.destroy
-        flash[:notice] = '空き枠を削除しました'
-      else
-        flash[:alert] = '権限がありません'
-      end
-      redirect_to planners_home_path
-    end
-
     private
 
     def range_params
       params.require(:range).permit(:date, :start_time, :end_time)
-    end
-
-    def authenticate_user!
-      if current_client.nil? && current_planner.nil?
-        flash[:alert] = 'ログインもしくはアカウント登録してください。'
-        redirect_to root_path
-      elsif current_client
-        authenticate_client!
-      elsif current_planner
-        authenticate_planner!
-      end
     end
 
     def authenticate_user!
