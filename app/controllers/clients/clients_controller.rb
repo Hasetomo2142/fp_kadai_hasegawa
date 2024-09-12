@@ -2,7 +2,7 @@
 
 module Clients
   class ClientsController < ApplicationController
-    before_action :authenticate_client!
+    before_action :authenticate_user!
 
     def home
       @grouped_day = Meeting.count_empty_slots_in_frames
