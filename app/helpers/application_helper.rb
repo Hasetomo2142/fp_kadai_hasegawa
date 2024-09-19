@@ -14,8 +14,8 @@ module ApplicationHelper
   end
 
   def convert_empty_slot_to_symbol(empty_slot)
-    return '○' if empty_slot >= 6
-    return '△' if empty_slot >= 3
+    return '○' if empty_slot >= 5
+    return '△' if empty_slot >= 1
 
     '×'
   end
@@ -39,7 +39,7 @@ module ApplicationHelper
     if current_client
       clients_home_path
     elsif current_planner
-      planners_path
+      planners_home_path
     else
       root_path
     end

@@ -26,7 +26,6 @@ module Clients
     #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
     # end
 
-    # クライアントログイン後のリダイレクト先　（現状はhome）
     def after_sign_in_path_for(_resource)
       clients_home_path
     end

@@ -1,0 +1,23 @@
+.container.bg-lite.p-5
+  .row.mb-4
+    .col-md-12.text-center
+      .card
+        h2.card-header.text-center
+          |次回のミーティング
+        .card-body
+        - if @next_meeting
+          h3.mb-4
+            = "#{@next_meeting.start_time.strftime('%-m月%-d日 %H:%M')}〜#{@next_meeting.end_time.strftime('%H:%M')}の枠"
+          h3.mb-4 
+            = link_to @next_meeting.client.name, 'mailto:#{client.email}'
+        - else
+          h3.mb-4 予定はありません
+        - if @next_meeting
+          .text-center.mt-2.mb-4
+            a href= meetings_path class="btn btn-outline-dark w-50" 全ての予定を確認
+        - else
+          .container.mb-5
+    
+    .container.mt-5.mb-5
+      = week_calendar(number_of_weeks: 1) do |date| 
+        = date
