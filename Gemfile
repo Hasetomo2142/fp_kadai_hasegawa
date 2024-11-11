@@ -11,7 +11,7 @@ gem 'jbuilder'
 gem 'tzinfo-data', platforms: %i[ windows jruby ]
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
-gem 'ridgepole', '~> 2.1'
+gem 'ridgepole', '~> 3.0'
 gem 'slim-rails'
 gem "html2slim", github: "slim-template/html2slim"
 gem 'bootstrap', '~> 5.3.0'
